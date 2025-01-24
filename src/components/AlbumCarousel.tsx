@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Album } from './Album';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { cn } from "@/lib/utils";
 
 interface AlbumData {
   id: number;
