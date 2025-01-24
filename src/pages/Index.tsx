@@ -1,27 +1,38 @@
-import { AlbumCarousel } from "@/components/AlbumCarousel";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { X } from "lucide-react";
+import MenuButton from "@/components/MenuButton";
 
 const Index = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
-    <main className="min-h-screen bg-black text-white">
-      <nav className="fixed top-0 w-full flex justify-between items-center p-6 z-50">
-        <button className="text-sm uppercase tracking-wider hover:opacity-75 transition-opacity">
-          Back
-        </button>
-        <h1 className="text-xl font-bold">EXPLORE</h1>
-        <button className="text-sm uppercase tracking-wider hover:opacity-75 transition-opacity">
-          Shop
-        </button>
-      </nav>
-      
-      <AlbumCarousel />
-      
-      <div className="fixed bottom-8 left-0 w-full text-center">
-        <h2 className="text-2xl font-bold mb-2">UTOPIA ALBUM</h2>
-        <div className="flex justify-center">
-          <img src="/lovable-uploads/55bbeabf-07dc-4cd8-9901-c2dac23d1927.png" alt="Album label" className="h-12 w-12" />
+    <div className="min-h-screen bg-[#1A1F2C] relative">
+      {/* Menu button */}
+      <MenuButton onOpenMenu={() => setMenuOpen(true)} />
+
+      {/* Fullscreen menu overlay */}
+      {menuOpen && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex flex-col items-center justify-center">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="absolute top-6 right-6 text-white hover:bg-white/10"
+            onClick={() => setMenuOpen(false)}
+          >
+            <X className="w-6 h-6" />
+          </Button>
+
+          <nav className="flex flex-col items-center gap-8 text-white">
+            <a href="#" className="text-xl hover:opacity-70 transition-opacity uppercase tracking-wider">Tour</a>
+            <a href="#" className="text-xl hover:opacity-70 transition-opacity uppercase tracking-wider">Utopia World</a>
+            <a href="#" className="text-xl hover:opacity-70 transition-opacity uppercase tracking-wider">Utopia Shop</a>
+            <a href="#" className="text-xl hover:opacity-70 transition-opacity uppercase tracking-wider">Utopia Album</a>
+            <div className="mt-8 text-sm opacity-50">PRE-SAVE NOW</div>
+          </nav>
         </div>
-      </div>
-    </main>
+      )}
+    </div>
   );
 };
 

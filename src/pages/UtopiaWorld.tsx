@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { X } from "lucide-react";
+import MenuButton from "@/components/MenuButton";
 
 const UtopiaWorld = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -38,15 +39,7 @@ const UtopiaWorld = () => {
       </div>
 
       {/* Menu button */}
-      <Button
-        variant="ghost"
-        size="lg"
-        className="fixed bottom-10 left-1/2 -translate-x-1/2 text-white border border-white/20 hover:bg-white/10"
-        onClick={() => setMenuOpen(true)}
-      >
-        <Menu className="w-6 h-6 mr-2" />
-        MENU
-      </Button>
+      <MenuButton onOpenMenu={() => setMenuOpen(true)} />
 
       {/* Fullscreen menu overlay */}
       {menuOpen && (
