@@ -18,13 +18,23 @@ const albums: AlbumData[] = [
   },
   {
     id: 2,
-    image: "/placeholder.svg",
-    title: "Album 2"
+    image: "/lovable-uploads/55bbeabf-07dc-4cd8-9901-c2dac23d1927.png",
+    title: "Utopia Album 2"
   },
   {
     id: 3,
-    image: "/placeholder.svg",
-    title: "Album 3"
+    image: "/lovable-uploads/55bbeabf-07dc-4cd8-9901-c2dac23d1927.png",
+    title: "Utopia Album 3"
+  },
+  {
+    id: 4,
+    image: "/lovable-uploads/55bbeabf-07dc-4cd8-9901-c2dac23d1927.png",
+    title: "Utopia Album 4"
+  },
+  {
+    id: 5,
+    image: "/lovable-uploads/55bbeabf-07dc-4cd8-9901-c2dac23d1927.png",
+    title: "Utopia Album 5"
   }
 ];
 

@@ -18,7 +18,7 @@ const Index = () => {
       <div className="fixed bottom-8 left-0 w-full text-center">
         <h2 className="text-2xl font-bold mb-2">UTOPIA ALBUM</h2>
         <div className="flex justify-center">
-          <img src="/placeholder.svg" alt="Album label" className="h-12 w-12" />
+          <img src="/lovable-uploads/55bbeabf-07dc-4cd8-9901-c2dac23d1927.png" alt="Album label" className="h-12 w-12" />
         </div>
       </div>
     </main>
