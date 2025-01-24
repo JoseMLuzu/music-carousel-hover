@@ -49,48 +49,53 @@ export function AlbumCarousel() {
     setCurrentIndex((prev) => (prev - 1 + albums.length) % albums.length);
   };
 
+  const getPositionClass = (index: number) => {
+    const position = (index - currentIndex + albums.length) % albums.length;
+    
+    if (position === 0) return "z-20 scale-100 opacity-100 blur-none"; // Centro
+    if (position === 1 || position === albums.length - 1) {
+      return "z-10 scale-75 opacity-50 blur-sm"; // Lados
+    }
+    return "opacity-0 scale-50"; // Ocultos
+  };
+
   return (
     <div className="relative w-full h-screen flex items-center justify-center">
       <Button
         variant="ghost"
         size="icon"
-        className="absolute left-4 z-10 text-white hover:bg-white/10"
+        className="absolute left-4 z-30 text-white hover:bg-white/10"
         onClick={prevSlide}
       >
         <ChevronLeft className="h-8 w-8" />
       </Button>
 
       <div className="flex items-center justify-center gap-8">
-        {albums.map((album, index) => {
-          let position = index - currentIndex;
-          if (position < 0) position += albums.length;
-          
-          return (
-            <div
-              key={album.id}
-              className={cn(
-                "carousel-item transition-all duration-500",
-                {
-                  "prev": position === albums.length - 1,
-                  "next": position === 1,
-                  "opacity-0 scale-75": position > 1 && position < albums.length - 1,
-                }
-              )}
-            >
-              <Album
-                image={album.image}
-                title={album.title}
-                className={position === 0 ? "z-10" : ""}
-              />
-            </div>
-          );
-        })}
+        {albums.map((album, index) => (
+          <div
+            key={album.id}
+            className={cn(
+              "carousel-item absolute transition-all duration-500",
+              getPositionClass(index),
+              {
+                "translate-x-0": index === currentIndex,
+                "-translate-x-[120%]": (index - currentIndex + albums.length) % albums.length === albums.length - 1,
+                "translate-x-[120%]": (index - currentIndex + albums.length) % albums.length === 1,
+              }
+            )}
+          >
+            <Album
+              image={album.image}
+              title={album.title}
+            />
+          </div>
+        ))}
       </div>
 
       <Button
         variant="ghost"
         size="icon"
-        className="absolute right-4 z-10 text-white hover:bg-white/10"
+        className="absolute right-4 z-30 text-white hover:bg-white/10"
         onClick={nextSlide}
       >
         <ChevronRight className="h-8 w-8" />
