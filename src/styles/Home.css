@@ -1,0 +1,34 @@
+/* Centrar el carrusel en la página */
+.carousel-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Centrado vertical y horizontal */
+  background-color: #000000; /* Fondo suave para destacar el carrusel */
+}
+
+.carousel-container {
+  position: relative;
+  width: 700px; /* Tamaño del carrusel */
+  height: 700px; /* Altura del carrusel - Ahora es cuadrado */
+  overflow: hidden;
+  border-radius: 15px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para destacar */
+  background-color: #000000; /* Fondo negro */
+}
+
+.carousel-image {
+  position: absolute;
+  top: 50%; /* Centrar la imagen verticalmente */
+  left: 50%; /* Centrar la imagen horizontalmente */
+  width: 800px; /* Hacer las imágenes más grandes */
+  height: 800px; /* Hacer las imágenes más grandes */
+  object-fit: cover; /* Las imágenes se recortan para llenar el espacio */
+  opacity: 0; /* Todas las imágenes empiezan invisibles */
+  transition: opacity 0.5s ease-in-out; /* Transición suave para la visibilidad */
+  transform: translate(-50%, -50%); /* Centrar las imágenes perfectamente */
+}
+
+.carousel-image.active {
+  opacity: 1; /* Solo la imagen activa será visible */
+}

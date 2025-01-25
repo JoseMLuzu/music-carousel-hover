@@ -21,7 +21,7 @@ const UtopiaWorld = () => {
   return (
     <div className="min-h-[200vh] bg-[#1A1F2C] relative">
       {/* Title that fades out on scroll */}
-      <h1 
+      <h1
         className="fixed top-10 left-1/2 -translate-x-1/2 text-4xl font-bold text-white transition-opacity duration-300"
         style={{ opacity: 1 - scrollY / 300 }}
       >
@@ -54,10 +54,24 @@ const UtopiaWorld = () => {
           </Button>
 
           <nav className="flex flex-col items-center gap-8 text-white">
-            <a href="#" className="text-xl hover:opacity-70 transition-opacity uppercase tracking-wider">Tour</a>
-            <a href="#" className="text-xl hover:opacity-70 transition-opacity uppercase tracking-wider">Utopia World</a>
-            <a href="#" className="text-xl hover:opacity-70 transition-opacity uppercase tracking-wider">Utopia Shop</a>
-            <a href="#" className="text-xl hover:opacity-70 transition-opacity uppercase tracking-wider">Utopia Album</a>
+            <a
+              href="#"
+              className="text-xl hover:opacity-70 transition-opacity uppercase tracking-wider"
+            >
+              Music
+            </a>
+            <a
+              href="#"
+              className="text-xl hover:opacity-70 transition-opacity uppercase tracking-wider"
+            >
+              Fashion
+            </a>
+            <a
+              href="#"
+              className="text-xl hover:opacity-70 transition-opacity uppercase tracking-wider"
+            >
+              Film
+            </a>
             <div className="mt-8 text-sm opacity-50">PRE-SAVE NOW</div>
           </nav>
         </div>

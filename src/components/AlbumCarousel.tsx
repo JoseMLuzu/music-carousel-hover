@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import { Album } from './Album';
-import { Button } from '@/components/ui/button';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useState } from "react";
+import { Album } from "./Album";
+import { Button } from "@/components/ui/button";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface AlbumData {
@@ -13,29 +13,29 @@ interface AlbumData {
 const albums: AlbumData[] = [
   {
     id: 1,
-    image: "/lovable-uploads/55bbeabf-07dc-4cd8-9901-c2dac23d1927.png",
-    title: "Utopia Album"
+    image: "https://rusia-idk.com/wp-content/uploads/suave.png",
+    title: "Utopia Album",
   },
   {
     id: 2,
-    image: "/lovable-uploads/55bbeabf-07dc-4cd8-9901-c2dac23d1927.png",
-    title: "Utopia Album 2"
+    image: "https://rusia-idk.com/wp-content/uploads/1.png",
+    title: "Utopia Album 2",
   },
   {
     id: 3,
-    image: "/lovable-uploads/55bbeabf-07dc-4cd8-9901-c2dac23d1927.png",
-    title: "Utopia Album 3"
+    image: "https://rusia-idk.com/wp-content/uploads/BABAYAGA.png",
+    title: "Utopia Album 3",
   },
   {
     id: 4,
-    image: "/lovable-uploads/55bbeabf-07dc-4cd8-9901-c2dac23d1927.png",
-    title: "Utopia Album 4"
+    image: "https://rusia-idk.com/wp-content/uploads/Dolores.png",
+    title: "Utopia Album 4",
   },
   {
     id: 5,
-    image: "/lovable-uploads/55bbeabf-07dc-4cd8-9901-c2dac23d1927.png",
-    title: "Utopia Album 5"
-  }
+    image: "https://rusia-idk.com/wp-content/uploads/LOTO.png",
+    title: "Utopia Album 5",
+  },
 ];
 
 export function AlbumCarousel() {
@@ -51,7 +51,7 @@ export function AlbumCarousel() {
 
   const getPositionClass = (index: number) => {
     const position = (index - currentIndex + albums.length) % albums.length;
-    
+
     if (position === 0) return "z-20 scale-100 opacity-100 blur-none"; // Centro
     if (position === 1 || position === albums.length - 1) {
       return "z-10 scale-75 opacity-50 blur-sm"; // Lados
@@ -79,15 +79,15 @@ export function AlbumCarousel() {
               getPositionClass(index),
               {
                 "translate-x-0": index === currentIndex,
-                "-translate-x-[120%]": (index - currentIndex + albums.length) % albums.length === albums.length - 1,
-                "translate-x-[120%]": (index - currentIndex + albums.length) % albums.length === 1,
+                "-translate-x-[120%]":
+                  (index - currentIndex + albums.length) % albums.length ===
+                  albums.length - 1,
+                "translate-x-[120%]":
+                  (index - currentIndex + albums.length) % albums.length === 1,
               }
             )}
           >
-            <Album
-              image={album.image}
-              title={album.title}
-            />
+            <Album image={album.image} title={album.title} />
           </div>
         ))}
       </div>
