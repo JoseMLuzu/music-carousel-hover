@@ -13,27 +13,32 @@ interface AlbumData {
 const albums: AlbumData[] = [
   {
     id: 1,
-    image: "https://rusia-idk.com/wp-content/uploads/suave.png",
+    image: "src/assets/albun/albun1.jpeg",
     title: "Utopia Album",
   },
   {
     id: 2,
-    image: "https://rusia-idk.com/wp-content/uploads/1.png",
+    image: "src/assets/albun/albun2.jpeg",
     title: "Utopia Album 2",
   },
   {
     id: 3,
-    image: "https://rusia-idk.com/wp-content/uploads/BABAYAGA.png",
+    image: "src/assets/albun/albun3.jpeg",
     title: "Utopia Album 3",
   },
   {
     id: 4,
-    image: "https://rusia-idk.com/wp-content/uploads/Dolores.png",
+    image: "src/assets/albun/albun4.png",
     title: "Utopia Album 4",
   },
   {
     id: 5,
-    image: "https://rusia-idk.com/wp-content/uploads/LOTO.png",
+    image: "src/assets/albun/albun5.JPEG",
+    title: "Utopia Album 5",
+  },
+  {
+    id: 5,
+    image: "src/assets/albun/albun6.JPEG",
     title: "Utopia Album 5",
   },
 ];

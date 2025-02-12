@@ -15,9 +15,6 @@ const Navbar: React.FC = () => {
         </Button>
       </Link>
 
-      {/* Título */}
-      <h1 className="text-3xl font-semibold">The 99 Collection</h1>
-
       {/* Botón de Contact usando ShadCN */}
       <Link to="/contact">
         <Button
