@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Album } from "./Album";
 import { Button } from "@/components/ui/button";
@@ -9,6 +8,7 @@ interface AlbumData {
   id: number;
   image: string;
   title: string;
+  audioUrl: string;
 }
 
 const albums: AlbumData[] = [
@@ -16,26 +16,31 @@ const albums: AlbumData[] = [
     id: 1,
     image: "https://rusia-idk.com/wp-content/uploads/suave.png",
     title: "HYAENA",
+    audioUrl: "https://rusia-idk.com/wp-content/uploads/hyaena-preview.mp3",
   },
   {
     id: 2,
     image: "https://rusia-idk.com/wp-content/uploads/1.png",
     title: "THANK GOD",
+    audioUrl: "https://rusia-idk.com/wp-content/uploads/thank-god-preview.mp3",
   },
   {
     id: 3,
     image: "https://rusia-idk.com/wp-content/uploads/BABAYAGA.png",
     title: "MODERN JAM",
+    audioUrl: "https://rusia-idk.com/wp-content/uploads/modern-jam-preview.mp3",
   },
   {
     id: 4,
     image: "https://rusia-idk.com/wp-content/uploads/Dolores.png",
     title: "MY EYES",
+    audioUrl: "https://rusia-idk.com/wp-content/uploads/my-eyes-preview.mp3",
   },
   {
     id: 5,
     image: "https://rusia-idk.com/wp-content/uploads/LOTO.png",
     title: "SIRENS",
+    audioUrl: "https://rusia-idk.com/wp-content/uploads/sirens-preview.mp3",
   },
 ];
 
@@ -91,6 +96,7 @@ export function AlbumCarousel() {
             <Album
               image={album.image}
               title={album.title}
+              audioUrl={album.audioUrl}
             />
           </div>
         ))}

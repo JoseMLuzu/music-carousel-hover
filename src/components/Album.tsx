@@ -8,14 +8,16 @@ import { Slider } from "./ui/slider";
 interface AlbumProps {
   image: string;
   title: string;
+  audioUrl: string;
   className?: string;
 }
 
-export function Album({ image, title, className }: AlbumProps) {
+export function Album({ image, title, audioUrl, className }: AlbumProps) {
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [volume, setVolume] = useState(50);
+  const [error, setError] = useState<string | null>(null);
   const albumRef = useRef<HTMLDivElement>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
 
@@ -44,7 +46,10 @@ export function Album({ image, title, className }: AlbumProps) {
       if (isPlaying) {
         audioRef.current.pause();
       } else {
-        audioRef.current.play();
+        audioRef.current.play().catch(err => {
+          console.error("Error playing audio:", err);
+          setError("Could not play audio preview");
+        });
       }
       setIsPlaying(!isPlaying);
     }
@@ -125,9 +130,13 @@ export function Album({ image, title, className }: AlbumProps) {
           </div>
         </div>
 
+        {error && (
+          <p className="text-red-500 text-sm mt-2">{error}</p>
+        )}
+
         <audio
           ref={audioRef}
-          src="/path/to/your/audio.mp3"
+          src={audioUrl}
           preload="metadata"
         />
       </div>
