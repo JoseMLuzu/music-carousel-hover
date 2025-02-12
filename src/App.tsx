@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -9,27 +10,30 @@ import UtopiaWorld from "./pages/UtopiaWorld";
 import MenuButton from "./components/MenuButton";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
+import { useState } from "react";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster /> {/* O puedes dejar solo Sonner dependiendo de tu necesidad */}
-      {/* <Sonner /> */}
-      <BrowserRouter>
-        {/* Navbar debe estar dentro de BrowserRouter */}
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/music" element={<AlbumCarousel />} />
-          <Route path="/utopia-world" element={<UtopiaWorld />} />
-        </Routes>
-        <MenuButton />
-      </BrowserRouter>
-      <Index />
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+const App = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <BrowserRouter>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/music" element={<AlbumCarousel />} />
+            <Route path="/utopia-world" element={<UtopiaWorld />} />
+          </Routes>
+          <MenuButton onOpenMenu={() => setIsMenuOpen(!isMenuOpen)} />
+        </BrowserRouter>
+        <Index />
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;

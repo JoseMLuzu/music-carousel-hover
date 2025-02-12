@@ -1,22 +1,23 @@
 
-import { useState, useRef, MouseEvent } from "react";
+import { useState, useRef, MouseEvent, useEffect } from "react";
 import { cn } from "@/lib/utils";
-import { Play, Pause, Volume2, VolumeX } from "lucide-react";
+import { Play, Pause } from "lucide-react";
 import { Button } from "./ui/button";
-import { Slider } from "./ui/slider";
+import { Progress } from "./ui/progress";
 
 interface AlbumProps {
   image: string;
   title: string;
   audioUrl: string;
   className?: string;
+  onPlay: () => void;
 }
 
-export function Album({ image, title, audioUrl, className }: AlbumProps) {
+export function Album({ image, title, audioUrl, className, onPlay }: AlbumProps) {
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(false);
-  const [volume, setVolume] = useState(50);
+  const [progress, setProgress] = useState(0);
+  const [duration, setDuration] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const albumRef = useRef<HTMLDivElement>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -46,6 +47,7 @@ export function Album({ image, title, audioUrl, className }: AlbumProps) {
       if (isPlaying) {
         audioRef.current.pause();
       } else {
+        onPlay(); // Notificar al padre que esta canción comenzará a reproducirse
         audioRef.current.play().catch(err => {
           console.error("Error playing audio:", err);
           setError("Could not play audio preview");
@@ -55,20 +57,51 @@ export function Album({ image, title, audioUrl, className }: AlbumProps) {
     }
   };
 
-  const toggleMute = () => {
+  const handleTimeUpdate = () => {
     if (audioRef.current) {
-      audioRef.current.muted = !isMuted;
-      setIsMuted(!isMuted);
+      const progress = (audioRef.current.currentTime / audioRef.current.duration) * 100;
+      setProgress(progress);
     }
   };
 
-  const handleVolumeChange = (value: number[]) => {
-    const newVolume = value[0];
+  const handleLoadedMetadata = () => {
     if (audioRef.current) {
-      audioRef.current.volume = newVolume / 100;
-      setVolume(newVolume);
+      setDuration(audioRef.current.duration);
     }
   };
+
+  const formatTime = (time: number) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+  };
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.addEventListener('timeupdate', handleTimeUpdate);
+      audioRef.current.addEventListener('loadedmetadata', handleLoadedMetadata);
+    }
+
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.removeEventListener('timeupdate', handleTimeUpdate);
+        audioRef.current.removeEventListener('loadedmetadata', handleLoadedMetadata);
+      }
+    };
+  }, []);
+
+  const stopPlaying = () => {
+    if (audioRef.current && isPlaying) {
+      audioRef.current.pause();
+      setIsPlaying(false);
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      stopPlaying();
+    };
+  }, []);
 
   return (
     <div className="flex flex-col items-center gap-4">
@@ -91,42 +124,28 @@ export function Album({ image, title, audioUrl, className }: AlbumProps) {
       </div>
 
       <div className="w-full max-w-[500px] bg-black/40 backdrop-blur-sm p-4 rounded-xl">
-        <div className="flex items-center gap-4">
-          <Button
-            variant="ghost"
-            size="icon"
-            className="text-white hover:bg-white/10"
-            onClick={togglePlay}
-          >
-            {isPlaying ? (
-              <Pause className="h-6 w-6" />
-            ) : (
-              <Play className="h-6 w-6" />
-            )}
-          </Button>
-
-          <div className="flex items-center gap-2 flex-1">
+        <div className="flex flex-col gap-2">
+          <div className="flex items-center gap-4">
             <Button
               variant="ghost"
               size="icon"
               className="text-white hover:bg-white/10"
-              onClick={toggleMute}
+              onClick={togglePlay}
             >
-              {isMuted ? (
-                <VolumeX className="h-5 w-5" />
+              {isPlaying ? (
+                <Pause className="h-6 w-6" />
               ) : (
-                <Volume2 className="h-5 w-5" />
+                <Play className="h-6 w-6" />
               )}
             </Button>
-            
-            <Slider
-              value={[volume]}
-              min={0}
-              max={100}
-              step={1}
-              onValueChange={handleVolumeChange}
-              className="flex-1"
-            />
+
+            <div className="flex-1 space-y-2">
+              <Progress value={progress} className="h-1" />
+              <div className="flex justify-between text-sm text-gray-400">
+                <span>{formatTime(audioRef.current?.currentTime || 0)}</span>
+                <span>{formatTime(duration)}</span>
+              </div>
+            </div>
           </div>
         </div>
 

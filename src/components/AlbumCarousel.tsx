@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Album } from "./Album";
 import { Button } from "@/components/ui/button";
@@ -46,6 +47,7 @@ const albums: AlbumData[] = [
 
 export function AlbumCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentlyPlayingId, setCurrentlyPlayingId] = useState<number | null>(null);
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % albums.length);
@@ -63,6 +65,10 @@ export function AlbumCarousel() {
       return "z-10 scale-75 opacity-50 blur-sm";
     }
     return "opacity-0 scale-50";
+  };
+
+  const handlePlay = (albumId: number) => {
+    setCurrentlyPlayingId(albumId);
   };
 
   return (
@@ -97,6 +103,8 @@ export function AlbumCarousel() {
               image={album.image}
               title={album.title}
               audioUrl={album.audioUrl}
+              onPlay={() => handlePlay(album.id)}
+              key={`${album.id}-${currentlyPlayingId === album.id}`}
             />
           </div>
         ))}
