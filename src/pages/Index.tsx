@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
@@ -8,7 +7,7 @@ const Index = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <div className="min-h-[200vh] bg-[#1A1F2C] relative">
+    <div className="min-h-screen bg-[#1A1F2C] relative">
       {/* Menu button */}
       <MenuButton onOpenMenu={() => setMenuOpen(true)} />
 

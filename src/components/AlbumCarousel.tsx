@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Album } from "./Album";
 import { Button } from "@/components/ui/button";
@@ -9,52 +8,33 @@ interface AlbumData {
   id: number;
   image: string;
   title: string;
-  songTitle: string;
-  audioUrl?: string;
 }
 
 const albums: AlbumData[] = [
   {
     id: 1,
-    image: "src/assets/albun/albun1.jpeg",
+    image: "https://rusia-idk.com/wp-content/uploads/suave.png",
     title: "Utopia Album",
-    songTitle: "HYAENA",
-    audioUrl: "", // Aquí irá la URL del demo de audio
   },
   {
     id: 2,
-    image: "src/assets/albun/albun2.jpeg",
+    image: "https://rusia-idk.com/wp-content/uploads/1.png",
     title: "Utopia Album 2",
-    songTitle: "THANK GOD",
-    audioUrl: "",
   },
   {
     id: 3,
-    image: "src/assets/albun/albun3.jpeg",
+    image: "https://rusia-idk.com/wp-content/uploads/BABAYAGA.png",
     title: "Utopia Album 3",
-    songTitle: "MODERN JAM",
-    audioUrl: "",
   },
   {
     id: 4,
-    image: "src/assets/albun/albun4.png",
+    image: "https://rusia-idk.com/wp-content/uploads/Dolores.png",
     title: "Utopia Album 4",
-    songTitle: "MY EYES",
-    audioUrl: "",
   },
   {
     id: 5,
-    image: "src/assets/albun/albun5.JPEG",
+    image: "https://rusia-idk.com/wp-content/uploads/LOTO.png",
     title: "Utopia Album 5",
-    songTitle: "LOOOVE",
-    audioUrl: "",
-  },
-  {
-    id: 6,
-    image: "src/assets/albun/albun6.JPEG",
-    title: "Utopia Album 6",
-    songTitle: "SIRENS",
-    audioUrl: "",
   },
 ];
 
@@ -72,11 +52,11 @@ export function AlbumCarousel() {
   const getPositionClass = (index: number) => {
     const position = (index - currentIndex + albums.length) % albums.length;
 
-    if (position === 0) return "z-20 scale-100 opacity-100 blur-none";
+    if (position === 0) return "z-20 scale-100 opacity-100 blur-none"; // Centro
     if (position === 1 || position === albums.length - 1) {
-      return "z-10 scale-75 opacity-50 blur-sm";
+      return "z-10 scale-75 opacity-50 blur-sm"; // Lados
     }
-    return "opacity-0 scale-50";
+    return "opacity-0 scale-50"; // Ocultos
   };
 
   return (
@@ -107,12 +87,7 @@ export function AlbumCarousel() {
               }
             )}
           >
-            <Album
-              image={album.image}
-              title={album.title}
-              songTitle={album.songTitle}
-              audioUrl={album.audioUrl}
-            />
+            <Album image={album.image} title={album.title} />
           </div>
         ))}
       </div>

@@ -15,20 +15,9 @@ const Navbar: React.FC = () => {
         </Button>
       </Link>
 
-<<<<<<< HEAD
-      {/* Botón de Contact usando ShadCN */}
-      <Link to="/contact">
-        <Button
-          variant="ghost" // Estilo minimalista sin fondo
-          className="text-white hover:bg-transparent transition-colors"
-        >
-          Contact
-        </Button>
-      </Link>
-=======
+      <h1 className="text-3xl font-semibold">The 99 Collection</h1>
 
       <ContactForm />
->>>>>>> a97b11c428eb727b6e1b3ee016e82f930984a7b6
     </nav>
   );
 };
