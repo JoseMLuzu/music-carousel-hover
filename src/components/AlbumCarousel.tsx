@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Album } from "./Album";
 import { Button } from "@/components/ui/button";
@@ -14,27 +15,27 @@ const albums: AlbumData[] = [
   {
     id: 1,
     image: "https://rusia-idk.com/wp-content/uploads/suave.png",
-    title: "Utopia Album",
+    title: "HYAENA",
   },
   {
     id: 2,
     image: "https://rusia-idk.com/wp-content/uploads/1.png",
-    title: "Utopia Album 2",
+    title: "THANK GOD",
   },
   {
     id: 3,
     image: "https://rusia-idk.com/wp-content/uploads/BABAYAGA.png",
-    title: "Utopia Album 3",
+    title: "MODERN JAM",
   },
   {
     id: 4,
     image: "https://rusia-idk.com/wp-content/uploads/Dolores.png",
-    title: "Utopia Album 4",
+    title: "MY EYES",
   },
   {
     id: 5,
     image: "https://rusia-idk.com/wp-content/uploads/LOTO.png",
-    title: "Utopia Album 5",
+    title: "SIRENS",
   },
 ];
 
@@ -52,11 +53,11 @@ export function AlbumCarousel() {
   const getPositionClass = (index: number) => {
     const position = (index - currentIndex + albums.length) % albums.length;
 
-    if (position === 0) return "z-20 scale-100 opacity-100 blur-none"; // Centro
+    if (position === 0) return "z-20 scale-100 opacity-100 blur-none";
     if (position === 1 || position === albums.length - 1) {
-      return "z-10 scale-75 opacity-50 blur-sm"; // Lados
+      return "z-10 scale-75 opacity-50 blur-sm";
     }
-    return "opacity-0 scale-50"; // Ocultos
+    return "opacity-0 scale-50";
   };
 
   return (
@@ -87,7 +88,10 @@ export function AlbumCarousel() {
               }
             )}
           >
-            <Album image={album.image} title={album.title} />
+            <Album
+              image={album.image}
+              title={album.title}
+            />
           </div>
         ))}
       </div>
