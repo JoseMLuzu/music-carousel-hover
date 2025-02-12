@@ -1,101 +1,55 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
 import MenuButton from "@/components/MenuButton";
-import { Link, useNavigate } from "react-router-dom";
 
 const Index = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const navigate = useNavigate();
-
-  const handleClose = () => {
-    setMenuOpen(false);
-  };
-
-  const handleNavigation = (path: string) => {
-    navigate(path);
-    handleClose();
-  };
 
   return (
     <div className="min-h-screen bg-[#1A1F2C] relative">
       {/* Menu button */}
       <MenuButton onOpenMenu={() => setMenuOpen(true)} />
 
-      {/* Email and Text positions */}
-      <div className="fixed top-1/2 -translate-y-1/2 left-8 text-white/60 text-sm tracking-wider rotate-[-90deg] origin-left">
-        EMAIL
-      </div>
-      <div className="fixed top-1/2 -translate-y-1/2 right-8 text-white/60 text-sm tracking-wider rotate-90 origin-right">
-        TEXT
-      </div>
-
       {/* Fullscreen menu overlay */}
       {menuOpen && (
-        <div className="fixed inset-0 bg-black/95 backdrop-blur-sm z-50 flex flex-col items-center justify-center">
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex flex-col items-center justify-center">
           <Button
             variant="ghost"
             size="icon"
             className="absolute top-6 right-6 text-white hover:bg-white/10"
-            onClick={handleClose}
+            onClick={() => setMenuOpen(false)}
           >
             <X className="w-6 h-6" />
           </Button>
 
-          <nav className="flex flex-col items-center gap-6">
-            <button
-              onClick={() => handleNavigation("/tour")}
-              className="px-12 py-2 border border-white/20 rounded-full text-white hover:bg-white/5 transition-colors uppercase tracking-widest text-sm"
+          <nav className="flex flex-col items-center gap-8 text-white">
+            <a
+              href="#"
+              className="text-xl hover:opacity-70 transition-opacity uppercase tracking-wider"
             >
-              TOUR
-            </button>
-            <button
-              onClick={() => handleNavigation("/utopia-world")}
-              className="px-12 py-2 border border-white/20 rounded-full text-white hover:bg-white/5 transition-colors uppercase tracking-widest text-sm"
+              Fashion
+            </a>
+            <a
+              href="music"
+              className="text-xl hover:opacity-70 transition-opacity uppercase tracking-wider"
             >
-              UTOPIA WORLD
-            </button>
-            <button
-              onClick={() => handleNavigation("/shop")}
-              className="px-12 py-2 border border-white/20 rounded-full text-white hover:bg-white/5 transition-colors uppercase tracking-widest text-sm"
+              Music
+            </a>
+            <a
+              href="music"
+              className="text-xl hover:opacity-70 transition-opacity uppercase tracking-wider"
             >
-              UTOPIA SHOP
-            </button>
-            <button
-              onClick={() => handleNavigation("/music")}
-              className="px-12 py-2 border border-white/20 rounded-full text-white hover:bg-white/5 transition-colors uppercase tracking-widest text-sm"
-            >
-              UTOPIA ALBUM
-            </button>
-          </nav>
-
-          <div className="absolute bottom-8 flex gap-6">
+              Films
+            </a>
             <a
               href="https://www.instagram.com/_t99c_/"
-              className="text-white/60 hover:text-white transition-colors"
+              className="text-xl hover:opacity-70 transition-opacity uppercase tracking-wider"
               target="_blank"
-              rel="noopener noreferrer"
             >
-              Instagram
+              <i className="fa-brands fa-instagram"></i>
             </a>
-            <a
-              href="#"
-              className="text-white/60 hover:text-white transition-colors"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              YouTube
-            </a>
-            <a
-              href="#"
-              className="text-white/60 hover:text-white transition-colors"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Twitter
-            </a>
-          </div>
+          </nav>
         </div>
       )}
     </div>
