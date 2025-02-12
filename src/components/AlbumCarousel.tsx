@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Album } from "./Album";
 import { Button } from "@/components/ui/button";
@@ -8,6 +9,8 @@ interface AlbumData {
   id: number;
   image: string;
   title: string;
+  songTitle: string;
+  audioUrl?: string;
 }
 
 const albums: AlbumData[] = [
@@ -15,31 +18,43 @@ const albums: AlbumData[] = [
     id: 1,
     image: "src/assets/albun/albun1.jpeg",
     title: "Utopia Album",
+    songTitle: "HYAENA",
+    audioUrl: "", // Aquí irá la URL del demo de audio
   },
   {
     id: 2,
     image: "src/assets/albun/albun2.jpeg",
     title: "Utopia Album 2",
+    songTitle: "THANK GOD",
+    audioUrl: "",
   },
   {
     id: 3,
     image: "src/assets/albun/albun3.jpeg",
     title: "Utopia Album 3",
+    songTitle: "MODERN JAM",
+    audioUrl: "",
   },
   {
     id: 4,
     image: "src/assets/albun/albun4.png",
     title: "Utopia Album 4",
+    songTitle: "MY EYES",
+    audioUrl: "",
   },
   {
     id: 5,
     image: "src/assets/albun/albun5.JPEG",
     title: "Utopia Album 5",
+    songTitle: "LOOOVE",
+    audioUrl: "",
   },
   {
-    id: 5,
+    id: 6,
     image: "src/assets/albun/albun6.JPEG",
-    title: "Utopia Album 5",
+    title: "Utopia Album 6",
+    songTitle: "SIRENS",
+    audioUrl: "",
   },
 ];
 
@@ -57,11 +72,11 @@ export function AlbumCarousel() {
   const getPositionClass = (index: number) => {
     const position = (index - currentIndex + albums.length) % albums.length;
 
-    if (position === 0) return "z-20 scale-100 opacity-100 blur-none"; // Centro
+    if (position === 0) return "z-20 scale-100 opacity-100 blur-none";
     if (position === 1 || position === albums.length - 1) {
-      return "z-10 scale-75 opacity-50 blur-sm"; // Lados
+      return "z-10 scale-75 opacity-50 blur-sm";
     }
-    return "opacity-0 scale-50"; // Ocultos
+    return "opacity-0 scale-50";
   };
 
   return (
@@ -92,7 +107,12 @@ export function AlbumCarousel() {
               }
             )}
           >
-            <Album image={album.image} title={album.title} />
+            <Album
+              image={album.image}
+              title={album.title}
+              songTitle={album.songTitle}
+              audioUrl={album.audioUrl}
+            />
           </div>
         ))}
       </div>
