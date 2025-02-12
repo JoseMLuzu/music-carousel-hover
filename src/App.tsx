@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -6,7 +7,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import { AlbumCarousel } from "./components/AlbumCarousel";
 import UtopiaWorld from "./pages/UtopiaWorld";
-import MenuButton from "./components/MenuButton";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 
@@ -15,19 +15,16 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <Toaster /> {/* O puedes dejar solo Sonner dependiendo de tu necesidad */}
-      {/* <Sonner /> */}
+      <Toaster />
       <BrowserRouter>
-        {/* Navbar debe estar dentro de BrowserRouter */}
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/music" element={<AlbumCarousel />} />
           <Route path="/utopia-world" element={<UtopiaWorld />} />
         </Routes>
-        <MenuButton />
+        <Index />
       </BrowserRouter>
-      <Index />
     </TooltipProvider>
   </QueryClientProvider>
 );
