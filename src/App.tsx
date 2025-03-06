@@ -4,7 +4,6 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
 import { AlbumCarousel } from "./components/AlbumCarousel";
 import UtopiaWorld from "./pages/UtopiaWorld";
 import MenuButton from "./components/MenuButton";
@@ -20,8 +19,9 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <Toaster />
         <BrowserRouter>
+          <Toaster />
+          <Sonner />
           <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
@@ -30,7 +30,6 @@ const App = () => {
           </Routes>
           <MenuButton onOpenMenu={() => setIsMenuOpen(!isMenuOpen)} />
         </BrowserRouter>
-        <Index />
       </TooltipProvider>
     </QueryClientProvider>
   );

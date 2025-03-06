@@ -1,7 +1,9 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
 import MenuButton from "@/components/MenuButton";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -13,7 +15,7 @@ const Index = () => {
 
       {/* Fullscreen menu overlay */}
       {menuOpen && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex flex-col items-center justify-center">
+        <div className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex flex-col items-center justify-center">
           <Button
             variant="ghost"
             size="icon"
@@ -24,30 +26,43 @@ const Index = () => {
           </Button>
 
           <nav className="flex flex-col items-center gap-8 text-white">
-            <a
-              href="#"
-              className="text-xl hover:opacity-70 transition-opacity uppercase tracking-wider"
+            <Link
+              to="/"
+              className="rounded-full border border-white/30 px-6 py-2 hover:bg-white/10 transition-all uppercase tracking-wider"
             >
-              Fashion
+              FASHION
+            </Link>
+            <Link
+              to="/music"
+              className="rounded-full border border-white/30 px-6 py-2 hover:bg-white/10 transition-all uppercase tracking-wider"
+            >
+              MUSIC
+            </Link>
+            <Link
+              to="/music"
+              className="rounded-full border border-white/30 px-6 py-2 hover:bg-white/10 transition-all uppercase tracking-wider"
+            >
+              FILMS
+            </Link>
+            <a
+              href="mailto:contact@the99collection.com"
+              className="rounded-full border border-white/30 px-6 py-2 hover:bg-white/10 transition-all uppercase tracking-wider"
+              target="_blank"
+            >
+              EMAIL
             </a>
             <a
-              href="music"
-              className="text-xl hover:opacity-70 transition-opacity uppercase tracking-wider"
+              href="sms:+123456789"
+              className="rounded-full border border-white/30 px-6 py-2 hover:bg-white/10 transition-all uppercase tracking-wider"
             >
-              Music
-            </a>
-            <a
-              href="music"
-              className="text-xl hover:opacity-70 transition-opacity uppercase tracking-wider"
-            >
-              Films
+              TEXT
             </a>
             <a
               href="https://www.instagram.com/_t99c_/"
-              className="text-xl hover:opacity-70 transition-opacity uppercase tracking-wider"
+              className="rounded-full border border-white/30 px-6 py-2 hover:bg-white/10 transition-all uppercase tracking-wider"
               target="_blank"
             >
-              <i className="fa-brands fa-instagram"></i>
+              <i className="fa-brands fa-instagram"></i> INSTAGRAM
             </a>
           </nav>
         </div>

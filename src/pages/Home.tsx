@@ -1,6 +1,8 @@
+
 import React, { useState } from "react";
 import "../styles/Home.css";
 import TitleScreen from "@/components/TitleScreen";
+import RotatingImages from "@/components/RotatingImages";
 
 // Importar imágenes desde la carpeta carousel
 import img1 from "../../public/carousel/img1.jpeg";
@@ -146,6 +148,7 @@ const Home = ({ interval = 300 }) => {
   return (
     <div>
       <TitleScreen />
+      <RotatingImages />
       <div
         className="relative w-full min-h-screen bg-black overflow-hidden mb-96"
         onMouseMove={handleMouseMove}
