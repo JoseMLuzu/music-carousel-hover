@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronUp, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -67,23 +67,29 @@ export function FashionGallery() {
 
   const variants = {
     enter: (direction: number) => ({
-      x: direction > 0 ? 1000 : -1000,
-      opacity: 0,
+      y: direction > 0 ? 500 : -500,
       scale: 0.8,
+      opacity: 0,
+      rotateX: direction > 0 ? 15 : -15,
+      zIndex: 0,
     }),
     center: {
-      x: 0,
-      opacity: 1,
+      y: 0,
       scale: 1,
+      opacity: 1,
+      rotateX: 0,
+      zIndex: 5,
       transition: {
         duration: 0.8,
         ease: [0.22, 1, 0.36, 1],
       },
     },
     exit: (direction: number) => ({
-      x: direction > 0 ? -1000 : 1000,
-      opacity: 0,
+      y: direction > 0 ? -500 : 500,
       scale: 0.8,
+      opacity: 0,
+      rotateX: direction > 0 ? -15 : 15,
+      zIndex: 0,
       transition: {
         duration: 0.8,
         ease: [0.22, 1, 0.36, 1],
@@ -92,7 +98,7 @@ export function FashionGallery() {
   };
 
   return (
-    <div className="relative w-full h-screen flex items-center justify-center overflow-hidden bg-black">
+    <div className="relative w-full h-screen flex items-center justify-center overflow-hidden bg-black perspective-1000">
       <div className="absolute top-10 left-0 w-full text-center">
         <h1 className="text-5xl font-bold text-white tracking-wider">
           FASHION
@@ -102,48 +108,55 @@ export function FashionGallery() {
       <Button
         variant="ghost"
         size="icon"
-        className="absolute left-4 z-30 text-white hover:bg-white/10"
+        className="absolute top-1/4 z-30 text-white hover:bg-white/10"
         onClick={prevSlide}
       >
-        <ChevronLeft className="h-8 w-8" />
+        <ChevronUp className="h-8 w-8" />
       </Button>
 
       <div className="w-full max-w-5xl h-[70vh] flex items-center justify-center overflow-hidden">
-        <AnimatePresence initial={false} custom={direction} mode="wait" onExitComplete={() => setIsAnimating(false)}>
-          <motion.div
-            key={currentIndex}
-            custom={direction}
-            variants={variants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            onAnimationStart={() => setIsAnimating(true)}
-            onAnimationComplete={() => setIsAnimating(false)}
-            className="absolute w-full h-[70vh] flex items-center justify-center"
-          >
-            <div className="relative group">
-              <img
-                src={fashionItems[currentIndex].image}
-                alt={fashionItems[currentIndex].title}
-                className="object-cover h-[60vh] max-w-[80vw] shadow-2xl rounded-sm transition-all duration-500 group-hover:scale-[1.02]"
-              />
-              <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-6 transform translate-y-0 opacity-100 transition-all duration-500">
-                <h2 className="text-3xl font-bold text-white">
-                  {fashionItems[currentIndex].title}
-                </h2>
+        <div className="relative h-[500px] w-[350px] card-deck-container">
+          <AnimatePresence initial={false} custom={direction} mode="wait" onExitComplete={() => setIsAnimating(false)}>
+            <motion.div
+              key={currentIndex}
+              custom={direction}
+              variants={variants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              onAnimationStart={() => setIsAnimating(true)}
+              onAnimationComplete={() => setIsAnimating(false)}
+              className="absolute w-[350px] card-item transform-style-3d"
+              style={{
+                transformStyle: "preserve-3d",
+                perspective: "1000px",
+                willChange: "transform",
+              }}
+            >
+              <div className="relative group shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+                <img
+                  src={fashionItems[currentIndex].image}
+                  alt={fashionItems[currentIndex].title}
+                  className="object-cover h-[500px] w-[350px] rounded-md transition-all duration-500 group-hover:scale-[1.02]"
+                />
+                <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-6 transform translate-y-0 opacity-100 transition-all duration-500">
+                  <h2 className="text-2xl font-bold text-white">
+                    {fashionItems[currentIndex].title}
+                  </h2>
+                </div>
               </div>
-            </div>
-          </motion.div>
-        </AnimatePresence>
+            </motion.div>
+          </AnimatePresence>
+        </div>
       </div>
 
       <Button
         variant="ghost"
         size="icon"
-        className="absolute right-4 z-30 text-white hover:bg-white/10"
+        className="absolute bottom-1/4 z-30 text-white hover:bg-white/10"
         onClick={nextSlide}
       >
-        <ChevronRight className="h-8 w-8" />
+        <ChevronDown className="h-8 w-8" />
       </Button>
 
       <div className="absolute bottom-10 left-0 w-full flex justify-center gap-2">
