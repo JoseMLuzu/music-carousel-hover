@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AlbumCarousel } from "./components/AlbumCarousel";
+import { FashionGallery } from "./components/FashionGallery";
 import UtopiaWorld from "./pages/UtopiaWorld";
 import MenuButton from "./components/MenuButton";
 import Navbar from "./components/Navbar";
@@ -26,6 +27,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/music" element={<AlbumCarousel />} />
+            <Route path="/fashion" element={<FashionGallery />} />
             <Route path="/utopia-world" element={<UtopiaWorld />} />
           </Routes>
           <MenuButton onOpenMenu={() => setIsMenuOpen(!isMenuOpen)} />
