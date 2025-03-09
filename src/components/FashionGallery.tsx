@@ -1,9 +1,6 @@
 
-import { useState, useEffect, useRef } from "react";
-import { Button } from "@/components/ui/button";
-import { ChevronUp, ChevronDown } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
+import type { Variants } from "framer-motion";
 
 interface FashionItem {
   id: number;
@@ -39,168 +36,100 @@ const fashionItems: FashionItem[] = [
   },
 ];
 
+// Define gradient colors for each fashion item
+const gradients: [number, number][] = [
+  [340, 10],   // Reddish
+  [20, 40],    // Orange
+  [60, 90],    // Yellow
+  [205, 245],  // Blue
+  [290, 320],  // Purple
+];
+
 export function FashionGallery() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [direction, setDirection] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  const nextSlide = () => {
-    if (isAnimating) return;
-    setDirection(1);
-    setCurrentIndex((prev) => (prev + 1) % fashionItems.length);
-  };
-
-  const prevSlide = () => {
-    if (isAnimating) return;
-    setDirection(-1);
-    setCurrentIndex((prev) => (prev - 1 + fashionItems.length) % fashionItems.length);
-  };
-
-  // Auto-scroll effect
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      nextSlide();
-    }, 5000);
-
-    return () => clearTimeout(timer);
-  }, [currentIndex]);
-
-  // Create indices for the stacked cards
-  const getVisibleIndices = () => {
-    const indices = [];
-    // Add current card
-    indices.push(currentIndex);
-    
-    // Add next 2 cards (for the stack effect)
-    for (let i = 1; i <= 2; i++) {
-      const nextIndex = (currentIndex + i) % fashionItems.length;
-      indices.push(nextIndex);
-    }
-    
-    return indices;
-  };
-
-  const getCardStyles = (index: number) => {
-    const position = getVisibleIndices().indexOf(index);
-    
-    if (position === -1) return { display: "none" };
-    
-    // Stack cards with decreasing z-index and slight offset
-    return {
-      zIndex: 10 - position,
-      top: `${position * 15}px`,
-      opacity: position === 0 ? 1 : 0.7 - position * 0.2,
-      scale: position === 0 ? 1 : 0.95 - position * 0.05,
-    };
-  };
+  const hue = (h: number) => `hsl(${h}, 100%, 50%)`;
 
   return (
-    <div className="relative w-full h-screen flex flex-col items-center justify-center overflow-hidden bg-black perspective-1000">
-      <div className="absolute top-10 left-0 w-full text-center">
+    <div className="relative w-full min-h-screen flex flex-col items-center justify-start bg-black overflow-auto pt-20 pb-40">
+      <div className="w-full text-center mb-10">
         <h1 className="text-5xl font-bold text-white tracking-wider">
           FASHION
         </h1>
       </div>
 
-      {/* Navigation buttons moved up to prevent overlap */}
-      <div className="absolute top-1/3 z-30 flex flex-col gap-6">
-        <Button
-          variant="ghost"
-          size="icon"
-          className="text-white hover:bg-white/10"
-          onClick={prevSlide}
-        >
-          <ChevronUp className="h-8 w-8" />
-        </Button>
-        
-        <Button
-          variant="ghost"
-          size="icon"
-          className="text-white hover:bg-white/10"
-          onClick={nextSlide}
-        >
-          <ChevronDown className="h-8 w-8" />
-        </Button>
-      </div>
-
-      <div className="w-full max-w-5xl h-[70vh] flex items-center justify-center overflow-hidden mt-20">
-        <div 
-          ref={containerRef} 
-          className="relative h-[500px] w-[350px] card-deck-container"
-        >
-          {fashionItems.map((item, index) => (
-            <AnimatePresence key={item.id} initial={false} mode="popLayout">
-              {getVisibleIndices().includes(index) && (
-                <motion.div
-                  initial={{ 
-                    y: direction > 0 ? -500 : 500, 
-                    opacity: 0, 
-                    rotateX: direction > 0 ? 10 : -10,
-                    scale: 0.9
-                  }}
-                  animate={{ 
-                    ...getCardStyles(index),
-                    y: 0, 
-                    opacity: getCardStyles(index).opacity, 
-                    rotateX: 0,
-                    scale: getCardStyles(index).scale
-                  }}
-                  exit={{ 
-                    y: direction > 0 ? 500 : -500, 
-                    opacity: 0, 
-                    rotateX: direction > 0 ? -10 : 10,
-                    scale: 0.9,
-                    transition: { duration: 0.5 }
-                  }}
-                  transition={{ 
-                    duration: 0.5, 
-                    ease: "easeInOut"
-                  }}
-                  className="absolute w-[350px] card-item transform-style-3d shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
-                  style={{
-                    transformStyle: "preserve-3d",
-                    willChange: "transform, opacity",
-                  }}
-                >
-                  <div className="relative group h-[500px] w-[350px] rounded-md overflow-hidden">
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      className="object-cover h-full w-full rounded-md transition-all duration-300"
-                    />
-                    <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-6">
-                      <h2 className="text-2xl font-bold text-white">
-                        {item.title}
-                      </h2>
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          ))}
-        </div>
-      </div>
-
-      <div className="absolute bottom-10 left-0 w-full flex justify-center gap-2">
-        {fashionItems.map((_, index) => (
-          <Button
-            key={index}
-            variant="ghost"
-            size="sm"
-            onClick={() => {
-              setDirection(index > currentIndex ? 1 : -1);
-              setCurrentIndex(index);
-            }}
-            className={cn(
-              "w-3 h-3 p-0 rounded-full",
-              index === currentIndex
-                ? "bg-white"
-                : "bg-white/30 hover:bg-white/50"
-            )}
+      <div className="max-w-lg w-full mx-auto px-4">
+        {fashionItems.map((item, i) => (
+          <FashionCard 
+            key={item.id}
+            item={item}
+            index={i}
+            hueA={gradients[i][0]}
+            hueB={gradients[i][1]}
           />
         ))}
       </div>
     </div>
+  );
+}
+
+interface FashionCardProps {
+  item: FashionItem;
+  index: number;
+  hueA: number;
+  hueB: number;
+}
+
+function FashionCard({ item, index, hueA, hueB }: FashionCardProps) {
+  const hue = (h: number) => `hsl(${h}, 100%, 50%)`;
+  const background = `linear-gradient(306deg, ${hue(hueA)}, ${hue(hueB)})`;
+
+  const cardVariants: Variants = {
+    offscreen: {
+      y: 300,
+      opacity: 0,
+    },
+    onscreen: {
+      y: 50,
+      rotate: -10,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        bounce: 0.4,
+        duration: 0.8,
+      },
+    },
+  };
+
+  return (
+    <motion.div
+      className="overflow-hidden flex justify-center items-center relative pt-5 mb-[-100px]"
+      initial="offscreen"
+      whileInView="onscreen"
+      viewport={{ once: false, amount: 0.8 }}
+    >
+      <div 
+        className="absolute top-0 left-0 right-0 bottom-0" 
+        style={{
+          background,
+          clipPath: `path("M 0 303.5 C 0 292.454 8.995 285.101 20 283.5 L 460 219.5 C 470.085 218.033 480 228.454 480 239.5 L 500 430 C 500 441.046 491.046 450 480 450 L 20 450 C 8.954 450 0 441.046 0 430 Z")`,
+        }}
+      />
+      
+      <motion.div
+        className="w-[300px] h-[430px] rounded-[20px] bg-[#f5f5f5] shadow-lg flex flex-col items-center justify-end overflow-hidden"
+        variants={cardVariants}
+        style={{ transformOrigin: "10% 60%" }}
+      >
+        <div className="w-full h-full relative overflow-hidden">
+          <img 
+            src={item.image} 
+            alt={item.title}
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/80 to-transparent">
+            <h2 className="text-2xl font-bold text-white">{item.title}</h2>
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
   );
 }
