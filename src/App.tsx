@@ -12,6 +12,8 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import { useState } from "react";
 import UtopiaWorld from "./pages/UtopiaWorld";
+import { FashionGallery } from "./components/FashionGallery";
+import { AlbumCarousel } from "./components/AlbumCarousel";
 
 const queryClient = new QueryClient();
 
@@ -36,6 +38,8 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/utopia-world" element={<UtopiaWorld />} />
+            <Route path="/fashion" element={<FashionGallery />} />
+            <Route path="/music" element={<AlbumCarousel />} />
           </Routes>
           <MenuButton onOpenMenu={handleOpenMenu} />
           
