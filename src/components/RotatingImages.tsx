@@ -1,6 +1,7 @@
 
 import React, { useEffect, useState } from "react";
-import rotatingImg from "/lovable-uploads/e2568179-1038-406e-9f90-862ac2cb252a.png";
+import rotatingImg1 from "/lovable-uploads/12baae7e-fd11-4697-bb37-d3a761354586.png";
+import rotatingImg2 from "/lovable-uploads/f32cc670-b56b-4f9a-9282-e53d5c5f812c.png";
 
 const RotatingImages = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -18,8 +19,7 @@ const RotatingImages = () => {
 
   // Calcular la opacidad y rotación basada en el scroll
   const opacity = Math.min(scrollPosition / 200, 1);
-  const rotationLeft = scrollPosition * 0.5; // Rotación hacia la izquierda
-  const rotationRight = -scrollPosition * 0.5; // Rotación hacia la derecha
+  const rotation = scrollPosition * 0.3; // Rotación sobre su propio eje
 
   return (
     <div className="fixed inset-0 pointer-events-none flex items-center justify-center z-40">
@@ -27,27 +27,31 @@ const RotatingImages = () => {
         className="relative w-full h-full flex items-center justify-center"
         style={{ opacity }}
       >
-        {/* Imagen girando a la izquierda */}
-        <img
-          src={rotatingImg}
-          alt="Rotating design left"
-          className="absolute w-48 h-48 object-contain"
-          style={{ 
-            transform: `rotate(${rotationLeft}deg)`,
-            transition: "transform 0.1s linear"
-          }}
-        />
+        {/* Primera imagen girando */}
+        <div className="absolute w-48 h-48 transform-style-3d">
+          <img
+            src={rotatingImg1}
+            alt="Rotating design 1"
+            className="absolute w-48 h-48 object-contain"
+            style={{ 
+              transform: `rotate(${rotation}deg)`,
+              transition: "transform 0.1s linear"
+            }}
+          />
+        </div>
         
-        {/* Imagen girando a la derecha */}
-        <img
-          src={rotatingImg}
-          alt="Rotating design right"
-          className="absolute w-48 h-48 object-contain"
-          style={{ 
-            transform: `rotate(${rotationRight}deg)`,
-            transition: "transform 0.1s linear"
-          }}
-        />
+        {/* Segunda imagen girando en dirección opuesta */}
+        <div className="absolute w-48 h-48 transform-style-3d ml-64">
+          <img
+            src={rotatingImg2}
+            alt="Rotating design 2"
+            className="absolute w-48 h-48 object-contain"
+            style={{ 
+              transform: `rotate(-${rotation}deg)`,
+              transition: "transform 0.1s linear"
+            }}
+          />
+        </div>
       </div>
     </div>
   );
