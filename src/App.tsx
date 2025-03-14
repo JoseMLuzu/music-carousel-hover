@@ -4,7 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { X } from "lucide-react";
+import { X, Music, Film, Instagram, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import MenuButton from "./components/MenuButton";
@@ -52,33 +52,57 @@ const App = () => {
               </Button>
 
               <nav className="flex flex-col items-center gap-8 text-white">
+                {/* Music option - vertical */}
                 <Link
-                  to="/"
-                  className="rounded-full border border-white/30 px-6 py-2 hover:bg-white/10 transition-all uppercase tracking-wider"
+                  to="/music"
+                  className="rounded-full border border-white/30 px-6 py-2 hover:bg-white/10 transition-all uppercase tracking-wider flex items-center gap-2"
                   onClick={handleCloseMenu}
                 >
-                  HOME
+                  <Music className="w-4 h-4" />
+                  <span>MUSIC</span>
                 </Link>
-                <a
-                  href="mailto:contact@the99collection.com"
-                  className="rounded-full border border-white/30 px-6 py-2 hover:bg-white/10 transition-all uppercase tracking-wider"
-                  target="_blank"
+
+                {/* Instagram, Fashion, Gmail in one row */}
+                <div className="flex items-center gap-4">
+                  {/* Instagram - left of Fashion */}
+                  <a
+                    href="https://www.instagram.com/_t99c_/"
+                    className="rounded-full border border-white/30 px-6 py-2 hover:bg-white/10 transition-all uppercase tracking-wider flex items-center gap-2"
+                    target="_blank"
+                  >
+                    <Instagram className="w-4 h-4" />
+                    <span>INSTA</span>
+                  </a>
+
+                  {/* Fashion - center */}
+                  <Link
+                    to="/fashion"
+                    className="rounded-full border border-white/30 px-6 py-2 hover:bg-white/10 transition-all uppercase tracking-wider"
+                    onClick={handleCloseMenu}
+                  >
+                    FASHION
+                  </Link>
+
+                  {/* Gmail - right of Fashion */}
+                  <a
+                    href="mailto:contact@the99collection.com"
+                    className="rounded-full border border-white/30 px-6 py-2 hover:bg-white/10 transition-all uppercase tracking-wider flex items-center gap-2"
+                    target="_blank"
+                  >
+                    <Mail className="w-4 h-4" />
+                    <span>GMAIL</span>
+                  </a>
+                </div>
+
+                {/* Film option - vertical */}
+                <Link
+                  to="/film"
+                  className="rounded-full border border-white/30 px-6 py-2 hover:bg-white/10 transition-all uppercase tracking-wider flex items-center gap-2"
+                  onClick={handleCloseMenu}
                 >
-                  EMAIL
-                </a>
-                <a
-                  href="sms:+123456789"
-                  className="rounded-full border border-white/30 px-6 py-2 hover:bg-white/10 transition-all uppercase tracking-wider"
-                >
-                  TEXT
-                </a>
-                <a
-                  href="https://www.instagram.com/_t99c_/"
-                  className="rounded-full border border-white/30 px-6 py-2 hover:bg-white/10 transition-all uppercase tracking-wider"
-                  target="_blank"
-                >
-                  INSTAGRAM
-                </a>
+                  <Film className="w-4 h-4" />
+                  <span>FILM</span>
+                </Link>
               </nav>
             </div>
           )}
