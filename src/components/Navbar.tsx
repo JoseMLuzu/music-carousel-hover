@@ -20,26 +20,6 @@ const Navbar: React.FC = () => {
             Home
           </Button>
         </Link>
-        <Link to="/music">
-          <Button
-            variant="ghost"
-            className={`text-white hover:bg-white/10 transition-colors ${
-              location.pathname === "/music" ? "border-b border-white" : ""
-            }`}
-          >
-            Music
-          </Button>
-        </Link>
-        <Link to="/fashion">
-          <Button
-            variant="ghost"
-            className={`text-white hover:bg-white/10 transition-colors ${
-              location.pathname === "/fashion" ? "border-b border-white" : ""
-            }`}
-          >
-            Fashion
-          </Button>
-        </Link>
       </div>
 
       <h1 className="text-3xl font-semibold">The 99 Collection</h1>

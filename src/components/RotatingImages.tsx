@@ -28,7 +28,7 @@ const RotatingImages = () => {
         style={{ opacity }}
       >
         {/* Contenedor para las imágenes apiladas */}
-        <div className="relative w-48 h-48 transform-style-3d">
+        <div className="relative w-72 h-72 transform-style-3d">
           {/* Primera imagen girando */}
           <img
             src={rotatingImg1}

@@ -36,18 +36,7 @@ const fashionItems: FashionItem[] = [
   },
 ];
 
-// Define gradient colors for each fashion item
-const gradients: [number, number][] = [
-  [340, 10],   // Reddish
-  [20, 40],    // Orange
-  [60, 90],    // Yellow
-  [205, 245],  // Blue
-  [290, 320],  // Purple
-];
-
 export function FashionGallery() {
-  const hue = (h: number) => `hsl(${h}, 100%, 50%)`;
-
   return (
     <div className="relative w-full min-h-screen flex flex-col items-center justify-start bg-black overflow-auto pt-20 pb-40">
       <div className="w-full text-center mb-10">
@@ -62,8 +51,6 @@ export function FashionGallery() {
             key={item.id}
             item={item}
             index={i}
-            hueA={gradients[i][0]}
-            hueB={gradients[i][1]}
           />
         ))}
       </div>
@@ -74,14 +61,9 @@ export function FashionGallery() {
 interface FashionCardProps {
   item: FashionItem;
   index: number;
-  hueA: number;
-  hueB: number;
 }
 
-function FashionCard({ item, index, hueA, hueB }: FashionCardProps) {
-  const hue = (h: number) => `hsl(${h}, 100%, 50%)`;
-  const background = `linear-gradient(306deg, ${hue(hueA)}, ${hue(hueB)})`;
-
+function FashionCard({ item, index }: FashionCardProps) {
   const cardVariants: Variants = {
     offscreen: {
       y: 300,
@@ -107,15 +89,14 @@ function FashionCard({ item, index, hueA, hueB }: FashionCardProps) {
       viewport={{ once: false, amount: 0.8 }}
     >
       <div 
-        className="absolute top-0 left-0 right-0 bottom-0" 
+        className="absolute top-0 left-0 right-0 bottom-0 bg-black" 
         style={{
-          background,
           clipPath: `path("M 0 303.5 C 0 292.454 8.995 285.101 20 283.5 L 460 219.5 C 470.085 218.033 480 228.454 480 239.5 L 500 430 C 500 441.046 491.046 450 480 450 L 20 450 C 8.954 450 0 441.046 0 430 Z")`,
         }}
       />
       
       <motion.div
-        className="w-[300px] h-[430px] rounded-[20px] bg-[#f5f5f5] shadow-lg flex flex-col items-center justify-end overflow-hidden"
+        className="w-[300px] h-[430px] rounded-[20px] bg-[#0a0a0a] shadow-lg flex flex-col items-center justify-end overflow-hidden"
         variants={cardVariants}
         style={{ transformOrigin: "10% 60%" }}
       >
@@ -123,7 +104,7 @@ function FashionCard({ item, index, hueA, hueB }: FashionCardProps) {
           <img 
             src={item.image} 
             alt={item.title}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover opacity-80"
           />
           <div className="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/80 to-transparent">
             <h2 className="text-2xl font-bold text-white">{item.title}</h2>
