@@ -27,25 +27,24 @@ const RotatingImages = () => {
         className="relative w-full h-full flex items-center justify-center"
         style={{ opacity }}
       >
-        {/* Primera imagen girando */}
-        <div className="absolute w-48 h-48 transform-style-3d">
+        {/* Contenedor para las imágenes apiladas */}
+        <div className="relative w-48 h-48 transform-style-3d">
+          {/* Primera imagen girando */}
           <img
             src={rotatingImg1}
             alt="Rotating design 1"
-            className="absolute w-48 h-48 object-contain"
+            className="absolute inset-0 w-full h-full object-contain mix-blend-screen"
             style={{ 
               transform: `rotate(${rotation}deg)`,
               transition: "transform 0.1s linear"
             }}
           />
-        </div>
-        
-        {/* Segunda imagen girando en dirección opuesta */}
-        <div className="absolute w-48 h-48 transform-style-3d ml-64">
+          
+          {/* Segunda imagen girando en dirección opuesta */}
           <img
             src={rotatingImg2}
             alt="Rotating design 2"
-            className="absolute w-48 h-48 object-contain"
+            className="absolute inset-0 w-full h-full object-contain mix-blend-screen"
             style={{ 
               transform: `rotate(-${rotation}deg)`,
               transition: "transform 0.1s linear"
