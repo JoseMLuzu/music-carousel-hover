@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Album } from "./Album";
 import { Button } from "@/components/ui/button";
@@ -15,39 +14,53 @@ interface AlbumData {
 const albums: AlbumData[] = [
   {
     id: 1,
-    image: "https://rusia-idk.com/wp-content/uploads/suave.png",
-    title: "HYAENA",
-    audioUrl: "https://rusia-idk.com/wp-content/uploads/hyaena-preview.mp3",
+    image:
+      "../../public/photos-music/DBC6FCB8-9DE9-4031-B166-254E63CA3FF5(1).jpeg",
+    title: "BIRDS DONT SING THEY SCREECH IN PAIN",
+    audioUrl:
+      "../../public/music/BIRDS DONT SING THEY SCREECH IN PAIN (mp3cut.net).wav",
   },
   {
     id: 2,
-    image: "https://rusia-idk.com/wp-content/uploads/1.png",
-    title: "THANK GOD",
-    audioUrl: "https://rusia-idk.com/wp-content/uploads/thank-god-preview.mp3",
+    image:
+      "../../public/photos-music/Screenshot 2024-03-31 at 11.06.23 PM 2(1).JPEG",
+    title: "ELZAHARA",
+    audioUrl: "../../public/music/ELZAHARA (mp3cut.net).wav",
   },
   {
     id: 3,
-    image: "https://rusia-idk.com/wp-content/uploads/BABAYAGA.png",
-    title: "MODERN JAM",
-    audioUrl: "https://rusia-idk.com/wp-content/uploads/modern-jam-preview.mp3",
+    image:
+      "../../public/photos-music/704EB2C4-267A-46AF-BBAB-1FCB6D6B1EC8(1).jpeg",
+    title: "FASHION KILLER",
+    audioUrl: "../../public/music/FASHION KILLER (mp3cut.net).wav",
   },
   {
     id: 4,
-    image: "https://rusia-idk.com/wp-content/uploads/Dolores.png",
-    title: "MY EYES",
-    audioUrl: "https://rusia-idk.com/wp-content/uploads/my-eyes-preview.mp3",
+    image:
+      "../../public/photos-music/Screenshot 2024-03-31 at 11.02.27 PM 2(1).JPEG",
+    title: "OBSCENE",
+    audioUrl: "../../public/music/OBSCENE (mp3cut.net).wav",
   },
   {
     id: 5,
-    image: "https://rusia-idk.com/wp-content/uploads/LOTO.png",
-    title: "SIRENS",
-    audioUrl: "https://rusia-idk.com/wp-content/uploads/sirens-preview.mp3",
+    image:
+      "../../public/photos-music/DF313B17-E5DF-4730-99B6-EABE92A6B12F.jpeg",
+    title: "RED DUSK",
+    audioUrl: "../../public/music/RED DUSK (mp3cut.net).wav",
+  },
+  {
+    id: 6,
+    image: "../../public/photos-music/5571(1).jpeg",
+    title: "SWIMMING POOLS",
+    audioUrl: "../../public/music/SWIMMING POOLS (mp3cut.net).wav",
   },
 ];
 
 export function AlbumCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [currentlyPlayingId, setCurrentlyPlayingId] = useState<number | null>(null);
+  const [currentlyPlayingId, setCurrentlyPlayingId] = useState<number | null>(
+    null
+  );
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % albums.length);

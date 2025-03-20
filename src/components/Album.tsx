@@ -1,4 +1,3 @@
-
 import { useState, useRef, MouseEvent, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Play, Pause } from "lucide-react";
@@ -13,7 +12,13 @@ interface AlbumProps {
   onPlay: () => void;
 }
 
-export function Album({ image, title, audioUrl, className, onPlay }: AlbumProps) {
+export function Album({
+  image,
+  title,
+  audioUrl,
+  className,
+  onPlay,
+}: AlbumProps) {
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -48,7 +53,7 @@ export function Album({ image, title, audioUrl, className, onPlay }: AlbumProps)
         audioRef.current.pause();
       } else {
         onPlay(); // Notificar al padre que esta canción comenzará a reproducirse
-        audioRef.current.play().catch(err => {
+        audioRef.current.play().catch((err) => {
           console.error("Error playing audio:", err);
           setError("Could not play audio preview");
         });
@@ -59,7 +64,8 @@ export function Album({ image, title, audioUrl, className, onPlay }: AlbumProps)
 
   const handleTimeUpdate = () => {
     if (audioRef.current) {
-      const progress = (audioRef.current.currentTime / audioRef.current.duration) * 100;
+      const progress =
+        (audioRef.current.currentTime / audioRef.current.duration) * 100;
       setProgress(progress);
     }
   };
@@ -73,19 +79,22 @@ export function Album({ image, title, audioUrl, className, onPlay }: AlbumProps)
   const formatTime = (time: number) => {
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60);
-    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
   };
 
   useEffect(() => {
     if (audioRef.current) {
-      audioRef.current.addEventListener('timeupdate', handleTimeUpdate);
-      audioRef.current.addEventListener('loadedmetadata', handleLoadedMetadata);
+      audioRef.current.addEventListener("timeupdate", handleTimeUpdate);
+      audioRef.current.addEventListener("loadedmetadata", handleLoadedMetadata);
     }
 
     return () => {
       if (audioRef.current) {
-        audioRef.current.removeEventListener('timeupdate', handleTimeUpdate);
-        audioRef.current.removeEventListener('loadedmetadata', handleLoadedMetadata);
+        audioRef.current.removeEventListener("timeupdate", handleTimeUpdate);
+        audioRef.current.removeEventListener(
+          "loadedmetadata",
+          handleLoadedMetadata
+        );
       }
     };
   }, []);
@@ -106,7 +115,7 @@ export function Album({ image, title, audioUrl, className, onPlay }: AlbumProps)
   return (
     <div className="flex flex-col items-center gap-4">
       <h2 className="text-2xl font-bold text-white mb-2">{title}</h2>
-      
+
       <div
         ref={albumRef}
         className={cn("album-container w-[500px] h-[500px] mx-auto", className)}
@@ -149,15 +158,9 @@ export function Album({ image, title, audioUrl, className, onPlay }: AlbumProps)
           </div>
         </div>
 
-        {error && (
-          <p className="text-red-500 text-sm mt-2">{error}</p>
-        )}
+        {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
 
-        <audio
-          ref={audioRef}
-          src={audioUrl}
-          preload="metadata"
-        />
+        <audio ref={audioRef} src={audioUrl} preload="metadata" />
       </div>
     </div>
   );
