@@ -44,9 +44,9 @@ const albums: AlbumData[] = [
   },
   {
     id: 6,
-    image: "../../public/photos-music/5571(1).jpeg",
+    image: "photos-music/5571(1).jpeg",
     title: "SWIMMING POOLS",
-    audioUrl: "../../public/music/SWIMMING POOLS (mp3cut.net).wav",
+    audioUrl: "music/SWIMMING POOLS (mp3cut.net).wav",
   },
 ];
 
