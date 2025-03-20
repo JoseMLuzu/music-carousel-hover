@@ -1,6 +1,7 @@
 
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
+import { useRef } from "react";
 
 interface FashionItem {
   id: number;
@@ -37,15 +38,41 @@ const fashionItems: FashionItem[] = [
 ];
 
 export function FashionGallery() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const containerVariants: Variants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
   return (
-    <div className="relative w-full min-h-screen flex flex-col items-center justify-start bg-black overflow-auto pt-20 pb-40">
-      <div className="w-full text-center mb-10">
+    <div className="relative w-full min-h-screen flex flex-col items-center justify-start bg-black overflow-hidden pt-28 pb-40">
+      <motion.div 
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="w-full text-center mb-16"
+      >
         <h1 className="text-5xl font-bold text-white tracking-wider">
           FASHION
         </h1>
-      </div>
+        <p className="text-lg text-gray-300 mt-4 max-w-2xl mx-auto px-4">
+          Discover our unique fashion perspective, blending contemporary styles with artistic expression.
+          Each piece tells a story of innovation and creativity.
+        </p>
+      </motion.div>
 
-      <div className="max-w-lg w-full mx-auto px-4">
+      <motion.div 
+        ref={containerRef}
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl w-full mx-auto px-6"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
         {fashionItems.map((item, i) => (
           <FashionCard 
             key={item.id}
@@ -53,7 +80,7 @@ export function FashionGallery() {
             index={i}
           />
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 }
@@ -65,52 +92,65 @@ interface FashionCardProps {
 
 function FashionCard({ item, index }: FashionCardProps) {
   const cardVariants: Variants = {
-    offscreen: {
-      y: 300,
+    hidden: { 
       opacity: 0,
-    },
-    onscreen: {
       y: 50,
-      rotate: -10,
+      rotateY: -10,
+    },
+    visible: {
       opacity: 1,
+      y: 0,
+      rotateY: 0,
       transition: {
         type: "spring",
-        bounce: 0.4,
-        duration: 0.8,
+        damping: 15,
+        stiffness: 100,
+        delay: index * 0.1,
       },
     },
+    hover: {
+      y: -10,
+      scale: 1.05,
+      boxShadow: "0px 10px 30px rgba(0, 0, 0, 0.5)",
+      transition: {
+        type: "spring",
+        stiffness: 300,
+        damping: 10
+      }
+    }
   };
 
   return (
     <motion.div
-      className="overflow-hidden flex justify-center items-center relative pt-5 mb-[-100px]"
-      initial="offscreen"
-      whileInView="onscreen"
-      viewport={{ once: false, amount: 0.8 }}
+      className="overflow-hidden relative rounded-xl"
+      variants={cardVariants}
+      whileHover="hover"
     >
-      <div 
-        className="absolute top-0 left-0 right-0 bottom-0 bg-black" 
-        style={{
-          clipPath: `path("M 0 303.5 C 0 292.454 8.995 285.101 20 283.5 L 460 219.5 C 470.085 218.033 480 228.454 480 239.5 L 500 430 C 500 441.046 491.046 450 480 450 L 20 450 C 8.954 450 0 441.046 0 430 Z")`,
-        }}
-      />
-      
-      <motion.div
-        className="w-[300px] h-[430px] rounded-[20px] bg-[#0a0a0a] shadow-lg flex flex-col items-center justify-end overflow-hidden"
-        variants={cardVariants}
-        style={{ transformOrigin: "10% 60%" }}
-      >
-        <div className="w-full h-full relative overflow-hidden">
-          <img 
-            src={item.image} 
-            alt={item.title}
-            className="w-full h-full object-cover opacity-80"
+      <div className="aspect-[3/4] overflow-hidden rounded-xl bg-gray-900">
+        <motion.img 
+          src={item.image} 
+          alt={item.title}
+          className="w-full h-full object-cover"
+          initial={{ scale: 1.1 }}
+          whileHover={{ scale: 1.2 }}
+          transition={{ duration: 0.4 }}
+        />
+        
+        <motion.div 
+          className="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/90 to-transparent"
+          initial={{ opacity: 0.8, y: 20 }}
+          whileHover={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <h2 className="text-2xl font-bold text-white tracking-wide">{item.title}</h2>
+          <motion.div 
+            className="h-0.5 bg-white w-0 mt-2"
+            initial={{ width: 0 }}
+            whileHover={{ width: "50%" }}
+            transition={{ duration: 0.3 }}
           />
-          <div className="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/80 to-transparent">
-            <h2 className="text-2xl font-bold text-white">{item.title}</h2>
-          </div>
-        </div>
-      </motion.div>
+        </motion.div>
+      </div>
     </motion.div>
   );
 }
