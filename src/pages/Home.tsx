@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import "../styles/Home.css";
 import TitleScreen from "@/components/TitleScreen";

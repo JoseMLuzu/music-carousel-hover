@@ -14,39 +14,33 @@ interface AlbumData {
 const albums: AlbumData[] = [
   {
     id: 1,
-    image:
-      "../../public/photos-music/DBC6FCB8-9DE9-4031-B166-254E63CA3FF5(1).jpeg",
+    image: "photos-music/DBC6FCB8-9DE9-4031-B166-254E63CA3FF5(1).jpeg",
     title: "BIRDS DONT SING THEY SCREECH IN PAIN",
-    audioUrl:
-      "../../public/music/BIRDS DONT SING THEY SCREECH IN PAIN (mp3cut.net).wav",
+    audioUrl: "music/BIRDS DONT SING THEY SCREECH IN PAIN (mp3cut.net).wav",
   },
   {
     id: 2,
-    image:
-      "../../public/photos-music/Screenshot 2024-03-31 at 11.06.23 PM 2(1).JPEG",
+    image: "photos-music/Screenshot 2024-03-31 at 11.06.23 PM 2(1).JPEG",
     title: "ELZAHARA",
-    audioUrl: "../../public/music/ELZAHARA (mp3cut.net).wav",
+    audioUrl: "music/ELZAHARA (mp3cut.net).wav",
   },
   {
     id: 3,
-    image:
-      "../../public/photos-music/704EB2C4-267A-46AF-BBAB-1FCB6D6B1EC8(1).jpeg",
+    image: "photos-music/704EB2C4-267A-46AF-BBAB-1FCB6D6B1EC8(1).jpeg",
     title: "FASHION KILLER",
-    audioUrl: "../../public/music/FASHION KILLER (mp3cut.net).wav",
+    audioUrl: "music/FASHION KILLER (mp3cut.net).wav",
   },
   {
     id: 4,
-    image:
-      "../../public/photos-music/Screenshot 2024-03-31 at 11.02.27 PM 2(1).JPEG",
+    image: "photos-music/Screenshot 2024-03-31 at 11.02.27 PM 2(1).JPEG",
     title: "OBSCENE",
-    audioUrl: "../../public/music/OBSCENE (mp3cut.net).wav",
+    audioUrl: "music/OBSCENE (mp3cut.net).wav",
   },
   {
     id: 5,
-    image:
-      "../../public/photos-music/DF313B17-E5DF-4730-99B6-EABE92A6B12F.jpeg",
+    image: "photos-music/DF313B17-E5DF-4730-99B6-EABE92A6B12F.jpeg",
     title: "RED DUSK",
-    audioUrl: "../../public/music/RED DUSK (mp3cut.net).wav",
+    audioUrl: "music/RED DUSK (mp3cut.net).wav",
   },
   {
     id: 6,
