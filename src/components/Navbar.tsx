@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "react-router-dom";
@@ -6,7 +5,7 @@ import ContactForm from "./ContactForm";
 
 const Navbar: React.FC = () => {
   const location = useLocation();
-  
+
   // Function to get page description based on current path
   const getPageDescription = () => {
     switch (location.pathname) {
@@ -27,7 +26,7 @@ const Navbar: React.FC = () => {
         return "The 99 Collection - A creative platform for artistic expression.";
     }
   };
-  
+
   return (
     <nav className="fixed top-0 left-0 right-0 bg-black text-white p-4 flex flex-col z-50">
       <div className="flex justify-between items-center">
@@ -44,11 +43,9 @@ const Navbar: React.FC = () => {
           </Link>
         </div>
 
-        <h1 className="text-3xl font-semibold">The 99 Collection</h1>
-
         <ContactForm />
       </div>
-      
+
       {/* Page description bar */}
       <div className="w-full text-center mt-2 px-4">
         <p className="text-sm text-gray-400 italic">{getPageDescription()}</p>
