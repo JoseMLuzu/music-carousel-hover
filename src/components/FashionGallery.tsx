@@ -1,67 +1,101 @@
+
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
-import { useRef } from "react";
+import { useState } from "react";
+import { ChevronDown, FolderOpen } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 interface FashionItem {
   id: number;
   image: string;
   title: string;
+  designer: string;
 }
+
+interface Designer {
+  id: string;
+  name: string;
+  description: string;
+  collection: string;
+}
+
+const designers: Designer[] = [
+  {
+    id: "j2-brand",
+    name: "J2 BRAND",
+    description: "Cutting-edge streetwear with bold silhouettes and unconventional materials.",
+    collection: "URBAN EVOLUTION",
+  },
+  {
+    id: "naida",
+    name: "NAIDA",
+    description: "Elegant minimalism with architectural details and refined materials.",
+    collection: "STRUCTURED POETRY",
+  },
+  {
+    id: "vision23",
+    name: "VISION23",
+    description: "Future-forward designs blending technology with sustainable practices.",
+    collection: "TOMORROW TODAY",
+  }
+];
 
 const fashionItems: FashionItem[] = [
   {
     id: 1,
     image: "photos-fashion/IMG_0121.jpg",
     title: "SUMMER COLLECTION",
+    designer: "j2-brand",
   },
   {
     id: 2,
     image: "photos-fashion/IMG_0145.jpg",
     title: "WINTER ESSENTIALS",
+    designer: "j2-brand",
   },
   {
     id: 3,
-    image: "photos-fashion/IMG_0211.jpg", // Reemplazo con una imagen ficticia
+    image: "photos-fashion/IMG_0211.jpg",
     title: "URBAN STYLE",
+    designer: "j2-brand",
   },
   {
     id: 4,
-    image: "photos-fashion/IMG_9997-8.jpg", // Reemplazo con una imagen ficticia
+    image: "photos-fashion/IMG_9997-8.jpg",
     title: "NIGHT GLAMOUR",
+    designer: "j2-brand",
   },
   {
     id: 5,
-    image: "photos-fashion/IMG_9617.jpg", // Reemplazo con una imagen ficticia
+    image: "photos-fashion/IMG_9617.jpg",
     title: "CASUAL WEAR",
+    designer: "naida",
   },
   {
     id: 6,
-    image: "photos-fashion/IMG_9718.jpg", // Reemplazo con una imagen ficticia
-    title: "CASUAL WEAR",
+    image: "photos-fashion/IMG_9718.jpg",
+    title: "STATEMENT PIECES",
+    designer: "naida",
   },
   {
     id: 7,
-    image: "photos-fashion/IMG_0265.jpg", // Reemplazo con una imagen ficticia
-    title: "CASUAL WEAR",
+    image: "photos-fashion/IMG_0265.jpg",
+    title: "AVANTGARDE SERIES",
+    designer: "vision23",
   },
   {
     id: 8,
-    image: "photos-fashion/J2_LOGO.jpg", // Reemplazo con una imagen ficticia
-    title: "CASUAL WEAR",
+    image: "photos-fashion/J2_LOGO.jpg",
+    title: "BRAND IDENTITY",
+    designer: "j2-brand",
   },
 ];
 
 export function FashionGallery() {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  const containerVariants: Variants = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  };
+  const [openDesigner, setOpenDesigner] = useState<string | null>("j2-brand");
 
   return (
     <div className="relative w-full min-h-screen flex flex-col items-center justify-start bg-black overflow-hidden pt-28 pb-40">
@@ -76,22 +110,96 @@ export function FashionGallery() {
         </h1>
         <p className="text-lg text-gray-300 mt-4 max-w-2xl mx-auto px-4">
           Discover our unique fashion perspective, blending contemporary styles
-          with artistic expression. Each piece tells a story of innovation and
+          with artistic expression. Each designer collection tells a story of innovation and
           creativity.
         </p>
       </motion.div>
 
-      <motion.div
-        ref={containerRef}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl w-full mx-auto px-6"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
+      <Tabs 
+        defaultValue="designers" 
+        className="w-full max-w-6xl mx-auto px-6"
       >
-        {fashionItems.map((item, i) => (
-          <FashionCard key={item.id} item={item} index={i} />
-        ))}
-      </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3, duration: 0.5 }}
+          className="flex justify-center mb-8"
+        >
+          <TabsList className="bg-gray-900/50 backdrop-blur-sm">
+            <TabsTrigger value="designers" className="text-white">Designer Collections</TabsTrigger>
+            <TabsTrigger value="all" className="text-white">View All</TabsTrigger>
+          </TabsList>
+        </motion.div>
+
+        <TabsContent value="designers" className="space-y-6">
+          {designers.map((designer, index) => (
+            <motion.div
+              key={designer.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 * index, duration: 0.5 }}
+            >
+              <Collapsible
+                open={openDesigner === designer.id}
+                onOpenChange={() => setOpenDesigner(openDesigner === designer.id ? null : designer.id)}
+                className="rounded-xl overflow-hidden bg-gray-900/30 backdrop-blur-sm"
+              >
+                <Card className="border-0 bg-transparent">
+                  <CollapsibleTrigger asChild>
+                    <Button 
+                      variant="ghost" 
+                      className="w-full flex justify-between items-center p-6 text-left h-auto"
+                    >
+                      <div className="flex items-center gap-3">
+                        <FolderOpen className="h-6 w-6 text-gray-400" />
+                        <div>
+                          <h3 className="text-2xl font-bold text-white">{designer.name}</h3>
+                          <p className="text-gray-400">{designer.collection}</p>
+                        </div>
+                      </div>
+                      <ChevronDown className={`h-5 w-5 text-white transition-transform duration-300 ${
+                        openDesigner === designer.id ? "transform rotate-180" : ""
+                      }`} />
+                    </Button>
+                  </CollapsibleTrigger>
+                  <CollapsibleContent>
+                    <CardContent className="pt-0 px-6 pb-6">
+                      <p className="text-gray-300 mb-6 italic">{designer.description}</p>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {fashionItems
+                          .filter(item => item.designer === designer.id)
+                          .map((item, i) => (
+                            <FashionCard key={item.id} item={item} index={i} />
+                          ))}
+                      </div>
+                    </CardContent>
+                  </CollapsibleContent>
+                </Card>
+              </Collapsible>
+            </motion.div>
+          ))}
+        </TabsContent>
+
+        <TabsContent value="all">
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full"
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: {},
+              visible: {
+                transition: {
+                  staggerChildren: 0.1,
+                },
+              },
+            }}
+          >
+            {fashionItems.map((item, i) => (
+              <FashionCard key={item.id} item={item} index={i} />
+            ))}
+          </motion.div>
+        </TabsContent>
+      </Tabs>
     </div>
   );
 }
@@ -136,6 +244,8 @@ function FashionCard({ item, index }: FashionCardProps) {
       className="overflow-hidden relative rounded-xl"
       variants={cardVariants}
       whileHover="hover"
+      initial="hidden"
+      animate="visible"
     >
       <div className="aspect-[3/4] overflow-hidden rounded-xl bg-gray-900">
         <motion.img
