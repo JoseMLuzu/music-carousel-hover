@@ -14,16 +14,14 @@ const films: FilmItem[] = [
   {
     id: 1,
     title: "I do",
-    thumbnail:
-      "https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1000",
-    videoUrl: "https://example.com/video1.mp4",
+    thumbnail: "https://img.youtube.com/vi/m3I6_CtqY5Q/0.jpg", // Miniatura válida de YouTube
+    videoUrl: "https://www.youtube.com/embed/m3I6_CtqY5Q", // URL de YouTube embebida
   },
   {
     id: 2,
     title: "NIGHT CITY",
-    thumbnail:
-      "https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?q=80&w=1000",
-    videoUrl: "https://example.com/video2.mp4",
+    thumbnail: "../../public/Firefox_Screenshot_2025-03-23T00-07-14.418Z.png", // Miniatura válida del video
+    videoUrl: "https://www.youtube.com/embed/7wJyDup6Rsg", // URL de YouTube embebida
   },
   {
     id: 3,
@@ -86,9 +84,12 @@ const FilmPage = () => {
 
   return (
     <div className="relative w-full min-h-screen bg-black text-white pt-28 pb-20">
-      <div className="flex items-center justify-center mb-8">
+      <div className="flex items-center justify-center mb-12">
+        {" "}
+        {/* Bajamos el título */}
         <Film className="w-8 h-8 mr-3" />
-        <h1 className="text-4xl font-bold">Film Collection</h1>
+        <h1 className="text-4xl font-bold mt-4">Film Collection</h1>{" "}
+        {/* Añadido margen superior */}
       </div>
 
       <div className="max-w-3xl mx-auto text-center mb-12">
@@ -99,6 +100,7 @@ const FilmPage = () => {
         </p>
       </div>
 
+      {/* Carrusel de videos */}
       <div className="relative w-full h-[60vh] flex items-center justify-center">
         <Button
           variant="ghost"
@@ -129,7 +131,14 @@ const FilmPage = () => {
               }}
             >
               <div className="relative w-[640px] h-[360px] bg-black rounded-lg overflow-hidden shadow-2xl">
-                {isPlaying && index === currentIndex ? (
+                {index === currentIndex && film.videoUrl.includes("youtube") ? (
+                  <iframe
+                    src={film.videoUrl}
+                    className="w-full h-full"
+                    allow="autoplay; encrypted-media"
+                    allowFullScreen
+                  />
+                ) : isPlaying && index === currentIndex ? (
                   <video
                     ref={videoRef}
                     className="w-full h-full object-cover"
@@ -150,16 +159,17 @@ const FilmPage = () => {
                   <h2 className="text-2xl font-bold">{film.title}</h2>
                 </div>
 
-                {index === currentIndex && (
-                  <motion.button
-                    className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center"
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={togglePlay}
-                  >
-                    <Play className="w-8 h-8 text-white" fill="white" />
-                  </motion.button>
-                )}
+                {index === currentIndex &&
+                  !film.videoUrl.includes("youtube") && (
+                    <motion.button
+                      className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={togglePlay}
+                    >
+                      <Play className="w-8 h-8 text-white" fill="white" />
+                    </motion.button>
+                  )}
               </div>
             </motion.div>
           ))}
