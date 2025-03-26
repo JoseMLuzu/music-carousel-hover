@@ -23,27 +23,6 @@ const films: FilmItem[] = [
     thumbnail: "../../public/Firefox_Screenshot_2025-03-23T00-07-14.418Z.png", // Miniatura válida del video
     videoUrl: "https://www.youtube.com/embed/7wJyDup6Rsg", // URL de YouTube embebida
   },
-  {
-    id: 3,
-    title: "NEON DREAMS",
-    thumbnail:
-      "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000",
-    videoUrl: "https://example.com/video3.mp4",
-  },
-  {
-    id: 4,
-    title: "FUTURE VISION",
-    thumbnail:
-      "https://images.unsplash.com/photo-1506157786151-b8491531f063?q=80&w=1000",
-    videoUrl: "https://example.com/video4.mp4",
-  },
-  {
-    id: 5,
-    title: "LUNAR ECLIPSE",
-    thumbnail:
-      "https://images.unsplash.com/photo-1518066000714-58c45f1a2c0a?q=80&w=1000",
-    videoUrl: "https://example.com/video5.mp4",
-  },
 ];
 
 const FilmPage = () => {

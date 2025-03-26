@@ -9,44 +9,51 @@ interface AlbumData {
   image: string;
   title: string;
   audioUrl: string;
+  link: string; // Enlace específico
 }
 
 const albums: AlbumData[] = [
   {
     id: 1,
-    image: "photos-music/DBC6FCB8-9DE9-4031-B166-254E63CA3FF5(1).jpeg",
-    title: "BIRDS DONT SING THEY SCREECH IN PAIN",
-    audioUrl: "music/BIRDS DONT SING THEY SCREECH IN PAIN (mp3cut.net).wav",
+    image: "photos-music/5571(1).jpeg",
+    title: "SWIMMING POOLS",
+    audioUrl: "music/SWIMMING POOLS (mp3cut.net).wav",
+    link: "https://soundcloud.com/the-99-collection/swimming-pools", // Enlace específico
   },
   {
     id: 2,
     image: "photos-music/Screenshot 2024-03-31 at 11.06.23 PM 2(1).JPEG",
     title: "ELZAHARA",
     audioUrl: "music/ELZAHARA (mp3cut.net).wav",
+    link: "https://soundcloud.com/the-99-collection/elzahara", // Enlace específico
   },
   {
     id: 3,
     image: "photos-music/704EB2C4-267A-46AF-BBAB-1FCB6D6B1EC8(1).jpeg",
     title: "FASHION KILLER",
     audioUrl: "music/FASHION KILLER (mp3cut.net).wav",
+    link: "https://soundcloud.com/the-99-collection/fashion-killer", // Enlace específico
   },
   {
     id: 4,
     image: "photos-music/Screenshot 2024-03-31 at 11.02.27 PM 2(1).JPEG",
     title: "OBSCENE",
     audioUrl: "music/OBSCENE (mp3cut.net).wav",
+    link: "https://soundcloud.com/the-99-collection/obscene", // Enlace específico
   },
   {
     id: 5,
     image: "photos-music/DF313B17-E5DF-4730-99B6-EABE92A6B12F.jpeg",
     title: "RED DUSK",
     audioUrl: "music/RED DUSK (mp3cut.net).wav",
+    link: "https://soundcloud.com/the-99-collection/red-dusk", // Enlace específico
   },
   {
     id: 6,
-    image: "photos-music/5571(1).jpeg",
-    title: "SWIMMING POOLS",
-    audioUrl: "music/SWIMMING POOLS (mp3cut.net).wav",
+    image: "photos-music/DBC6FCB8-9DE9-4031-B166-254E63CA3FF5(1).jpeg",
+    title: "BIRDS DONT SING THEY SCREECH IN PAIN",
+    audioUrl: "music/BIRDS DONT SING THEY SCREECH IN PAIN (mp3cut.net).wav",
+    link: "https://soundcloud.com/the-99-collection/birds-dont-sing-they-screech", // Enlace específico
   },
 ];
 
@@ -106,13 +113,25 @@ export function AlbumCarousel() {
               }
             )}
           >
-            <Album
-              image={album.image}
-              title={album.title}
-              audioUrl={album.audioUrl}
-              onPlay={() => handlePlay(album.id)}
-              key={`${album.id}-${currentlyPlayingId === album.id}`}
-            />
+            <a
+              href={album.link} // Enlace dinámico
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Album
+                image={album.image}
+                title={album.title}
+                audioUrl={album.audioUrl}
+                onPlay={() => handlePlay(album.id)}
+                key={`${album.id}-${currentlyPlayingId === album.id}`}
+                className={cn(
+                  "object-cover",
+                  album.id === 2 // Cambia el ID según la imagen que quieras personalizar
+                    ? "w-[30vw] h-[20vw] max-w-[200px] max-h-[200px]"
+                    : "w-[30vw] h-[30vw] max-w-[200px] max-h-[200px] sm:w-[25vw] sm:h-[25vw] sm.max-w-[250px] sm.max-h-[250px] lg:w-[15vw] lg:h-[15vw] lg.max-w-[300px] lg.max-h-[300px]"
+                )}
+              />
+            </a>
           </div>
         ))}
       </div>

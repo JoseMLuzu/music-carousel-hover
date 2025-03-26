@@ -1,10 +1,13 @@
-
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { useState } from "react";
 import { ChevronDown, FolderOpen } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -25,22 +28,25 @@ interface Designer {
 const designers: Designer[] = [
   {
     id: "j2-brand",
-    name: "J2 BRAND",
-    description: "Cutting-edge streetwear with bold silhouettes and unconventional materials.",
+    name: "Renda copeii",
+    description:
+      "Cutting-edge streetwear with bold silhouettes and unconventional materials.",
     collection: "URBAN EVOLUTION",
   },
   {
-    id: "naida",
-    name: "NAIDA",
-    description: "Elegant minimalism with architectural details and refined materials.",
+    id: "oraculum",
+    name: "Oraculum",
+    description:
+      "Elegant minimalism with architectural details and refined materials.",
     collection: "STRUCTURED POETRY",
   },
   {
     id: "vision23",
     name: "VISION23",
-    description: "Future-forward designs blending technology with sustainable practices.",
+    description:
+      "Future-forward designs blending technology with sustainable practices.",
     collection: "TOMORROW TODAY",
-  }
+  },
 ];
 
 const fashionItems: FashionItem[] = [
@@ -72,25 +78,55 @@ const fashionItems: FashionItem[] = [
     id: 5,
     image: "photos-fashion/IMG_9617.jpg",
     title: "CASUAL WEAR",
-    designer: "naida",
+    designer: "j2-brand",
   },
   {
     id: 6,
     image: "photos-fashion/IMG_9718.jpg",
     title: "STATEMENT PIECES",
-    designer: "naida",
+    designer: "j2-brand",
   },
   {
     id: 7,
     image: "photos-fashion/IMG_0265.jpg",
     title: "AVANTGARDE SERIES",
-    designer: "vision23",
+    designer: "j2-brand",
   },
   {
     id: 8,
     image: "photos-fashion/J2_LOGO.jpg",
     title: "BRAND IDENTITY",
     designer: "j2-brand",
+  },
+  {
+    id: 9,
+    image: "photos-fashion/IMG_0851.jpg",
+    title: "BRAND IDENTITY",
+    designer: "oraculum",
+  },
+  {
+    id: 10,
+    image: "photos-fashion/IMG_0817.jpg",
+    title: "BRAND IDENTITY",
+    designer: "oraculum",
+  },
+  {
+    id: 11,
+    image: "photos-fashion/IMG_0785-2.jpg",
+    title: "BRAND IDENTITY",
+    designer: "oraculum",
+  },
+  {
+    id: 12,
+    image: "photos-fashion/IMG_0586.jpg",
+    title: "BRAND IDENTITY",
+    designer: "oraculum",
+  },
+  {
+    id: 13,
+    image: "photos-fashion/IMG_0564.jpg",
+    title: "BRAND IDENTITY",
+    designer: "oraculum",
   },
 ];
 
@@ -110,15 +146,12 @@ export function FashionGallery() {
         </h1>
         <p className="text-lg text-gray-300 mt-4 max-w-2xl mx-auto px-4">
           Discover our unique fashion perspective, blending contemporary styles
-          with artistic expression. Each designer collection tells a story of innovation and
-          creativity.
+          with artistic expression. Each designer collection tells a story of
+          innovation and creativity.
         </p>
       </motion.div>
 
-      <Tabs 
-        defaultValue="designers" 
-        className="w-full max-w-6xl mx-auto px-6"
-      >
+      <Tabs defaultValue="designers" className="w-full max-w-6xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -126,8 +159,12 @@ export function FashionGallery() {
           className="flex justify-center mb-8"
         >
           <TabsList className="bg-gray-900/50 backdrop-blur-sm">
-            <TabsTrigger value="designers" className="text-white">Designer Collections</TabsTrigger>
-            <TabsTrigger value="all" className="text-white">View All</TabsTrigger>
+            <TabsTrigger value="designers" className="text-white">
+              Designer Collections
+            </TabsTrigger>
+            <TabsTrigger value="all" className="text-white">
+              View All
+            </TabsTrigger>
           </TabsList>
         </motion.div>
 
@@ -141,33 +178,45 @@ export function FashionGallery() {
             >
               <Collapsible
                 open={openDesigner === designer.id}
-                onOpenChange={() => setOpenDesigner(openDesigner === designer.id ? null : designer.id)}
+                onOpenChange={() =>
+                  setOpenDesigner(
+                    openDesigner === designer.id ? null : designer.id
+                  )
+                }
                 className="rounded-xl overflow-hidden bg-gray-900/30 backdrop-blur-sm"
               >
                 <Card className="border-0 bg-transparent">
                   <CollapsibleTrigger asChild>
-                    <Button 
-                      variant="ghost" 
+                    <Button
+                      variant="ghost"
                       className="w-full flex justify-between items-center p-6 text-left h-auto"
                     >
                       <div className="flex items-center gap-3">
                         <FolderOpen className="h-6 w-6 text-gray-400" />
                         <div>
-                          <h3 className="text-2xl font-bold text-white">{designer.name}</h3>
+                          <h3 className="text-2xl font-bold text-white">
+                            {designer.name}
+                          </h3>
                           <p className="text-gray-400">{designer.collection}</p>
                         </div>
                       </div>
-                      <ChevronDown className={`h-5 w-5 text-white transition-transform duration-300 ${
-                        openDesigner === designer.id ? "transform rotate-180" : ""
-                      }`} />
+                      <ChevronDown
+                        className={`h-5 w-5 text-white transition-transform duration-300 ${
+                          openDesigner === designer.id
+                            ? "transform rotate-180"
+                            : ""
+                        }`}
+                      />
                     </Button>
                   </CollapsibleTrigger>
                   <CollapsibleContent>
                     <CardContent className="pt-0 px-6 pb-6">
-                      <p className="text-gray-300 mb-6 italic">{designer.description}</p>
+                      <p className="text-gray-300 mb-6 italic">
+                        {designer.description}
+                      </p>
                       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                         {fashionItems
-                          .filter(item => item.designer === designer.id)
+                          .filter((item) => item.designer === designer.id)
                           .map((item, i) => (
                             <FashionCard key={item.id} item={item} index={i} />
                           ))}
@@ -250,7 +299,6 @@ function FashionCard({ item, index }: FashionCardProps) {
       <div className="aspect-[3/4] overflow-hidden rounded-xl bg-gray-900">
         <motion.img
           src={item.image}
-          alt={item.title}
           className="w-full h-full object-cover"
           initial={{ scale: 1.1 }}
           whileHover={{ scale: 1.2 }}
@@ -263,9 +311,7 @@ function FashionCard({ item, index }: FashionCardProps) {
           whileHover={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
         >
-          <h2 className="text-2xl font-bold text-white tracking-wide">
-            {item.title}
-          </h2>
+          <h2 className="text-2xl font-bold text-white tracking-wide"></h2>
           <motion.div
             className="h-0.5 bg-white w-0 mt-2"
             initial={{ width: 0 }}
