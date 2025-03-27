@@ -13,14 +13,26 @@ interface FilmItem {
 const films: FilmItem[] = [
   {
     id: 1,
+    title: "Swing Pols",
+    thumbnail: "https://img.youtube.com/vi/TOcoHDHaEUg/0.jpg", // Miniatura válida de YouTube
+    videoUrl: "https://www.youtube.com/embed/TOcoHDHaEUg", // URL de YouTube embebida
+  },
+  {
+    id: 2,
     title: "I do",
     thumbnail: "https://img.youtube.com/vi/m3I6_CtqY5Q/0.jpg", // Miniatura válida de YouTube
     videoUrl: "https://www.youtube.com/embed/m3I6_CtqY5Q", // URL de YouTube embebida
   },
   {
-    id: 2,
-    title: "NIGHT CITY",
-    thumbnail: "../../public/Firefox_Screenshot_2025-03-23T00-07-14.418Z.png", // Miniatura válida del video
+    id: 3,
+    title: "The Donut Theory",
+    thumbnail: "https://img.youtube.com/vi/nNT03jDKqS8/0.jpg", // Miniatura válida de YouTube
+    videoUrl: "https://www.youtube.com/embed/nNT03jDKqS8", // URL de YouTube embebida
+  },
+  {
+    id: 4,
+    title: "Brutus",
+    thumbnail: "https://img.youtube.com/vi/7wJyDup6Rsg/0.jpg", // Miniatura válida de YouTube
     videoUrl: "https://www.youtube.com/embed/7wJyDup6Rsg", // URL de YouTube embebida
   },
 ];
@@ -64,30 +76,19 @@ const FilmPage = () => {
   return (
     <div className="relative w-full min-h-screen bg-black text-white pt-28 pb-20">
       <div className="flex items-center justify-center mb-12">
-        {" "}
-        {/* Bajamos el título */}
         <Film className="w-8 h-8 mr-3" />
-        <h1 className="text-4xl font-bold mt-4">Film Collection</h1>{" "}
-        {/* Añadido margen superior */}
-      </div>
-
-      <div className="max-w-3xl mx-auto text-center mb-12">
-        <p className="text-lg text-gray-300 leading-relaxed">
-          Explore our cinematic universe through visual storytelling and
-          immersive film experiences. Each film is a journey into a unique world
-          of creativity and expression.
-        </p>
+        <h1 className="text-2xl md:text-4xl font-bold mt-4">Film Collection</h1>
       </div>
 
       {/* Carrusel de videos */}
-      <div className="relative w-full h-[60vh] flex items-center justify-center">
+      <div className="relative w-full h-[50vh] md:h-[60vh] flex items-center justify-center">
         <Button
           variant="ghost"
           size="icon"
           className="absolute left-4 z-30 text-white hover:bg-white/10"
           onClick={prevFilm}
         >
-          <ChevronLeft className="h-8 w-8" />
+          <ChevronLeft className="h-6 w-6 md:h-8 md:w-8" />
         </Button>
 
         <div className="flex items-center justify-center">
@@ -109,23 +110,25 @@ const FilmPage = () => {
                 zIndex: index === currentIndex ? 20 : 10,
               }}
             >
-              <div className="relative w-[640px] h-[360px] bg-black rounded-lg overflow-hidden shadow-2xl">
-                {index === currentIndex && film.videoUrl.includes("youtube") ? (
+              <div className="relative w-[80%] md:w-[480px] h-[150px] md:h-[270px] bg-black rounded-lg overflow-hidden shadow-2xl">
+                {index === currentIndex && film.id === 4 ? (
+                  <video
+                    ref={videoRef}
+                    className="w-full h-full object-cover"
+                    controls
+                    poster={film.thumbnail}
+                  >
+                    <source src="/video/MOVIECLIP_PAC.mov" type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                ) : index === currentIndex &&
+                  film.videoUrl.includes("youtube") ? (
                   <iframe
                     src={film.videoUrl}
                     className="w-full h-full"
                     allow="autoplay; encrypted-media"
                     allowFullScreen
                   />
-                ) : isPlaying && index === currentIndex ? (
-                  <video
-                    ref={videoRef}
-                    className="w-full h-full object-cover"
-                    controls={false}
-                    poster={film.thumbnail}
-                  >
-                    <source src={film.videoUrl} type="video/mp4" />
-                  </video>
                 ) : (
                   <img
                     src={film.thumbnail}
@@ -133,22 +136,11 @@ const FilmPage = () => {
                     className="w-full h-full object-cover"
                   />
                 )}
+              </div>
 
-                <div className="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black to-transparent">
-                  <h2 className="text-2xl font-bold">{film.title}</h2>
-                </div>
-
-                {index === currentIndex &&
-                  !film.videoUrl.includes("youtube") && (
-                    <motion.button
-                      className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center"
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={togglePlay}
-                    >
-                      <Play className="w-8 h-8 text-white" fill="white" />
-                    </motion.button>
-                  )}
+              {/* Título debajo del video */}
+              <div className="mt-4 text-center">
+                <h2 className="text-lg md:text-2xl font-bold">{film.title}</h2>
               </div>
             </motion.div>
           ))}
@@ -160,7 +152,7 @@ const FilmPage = () => {
           className="absolute right-4 z-30 text-white hover:bg-white/10"
           onClick={nextFilm}
         >
-          <ChevronRight className="h-8 w-8" />
+          <ChevronRight className="h-6 w-6 md:h-8 md:w-8" />
         </Button>
       </div>
     </div>

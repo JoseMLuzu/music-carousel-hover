@@ -62,7 +62,6 @@ import img59 from "../../public/carousel/img59.jpeg";
 import img60 from "../../public/carousel/img60.jpeg";
 
 const Home = ({ interval = 300 }) => {
-  // Colocar todas las imágenes en un array
   const images = [
     img1,
     img2,
@@ -132,7 +131,7 @@ const Home = ({ interval = 300 }) => {
       ...prevTrails,
       {
         x,
-        y,
+        y: y + window.scrollY, // Ajustar la posición vertical con el desplazamiento del scroll
         image: images[Math.floor(Math.random() * images.length)], // Elegir imagen aleatoria
         id: Date.now(), // Identificador único
       },
@@ -145,13 +144,13 @@ const Home = ({ interval = 300 }) => {
   };
 
   return (
-    <div>
+    <div
+      className="relative w-full bg-black overflow-hidden" // Contenedor principal
+      onMouseMove={handleMouseMove} // Capturar el movimiento del mouse en toda la pantalla
+    >
       <TitleScreen />
       <RotatingImages />
-      <div
-        className="relative w-full min-h-screen bg-black overflow-hidden mb-96"
-        onMouseMove={handleMouseMove}
-      >
+      <div className="relative w-full min-h-screen mb-96">
         {trails.map((trail) => (
           <img
             key={trail.id}
@@ -162,6 +161,8 @@ const Home = ({ interval = 300 }) => {
               left: `${trail.x}px`,
               top: `${trail.y}px`,
               transform: "translate(-50%, -50%)",
+              zIndex: 9999, // Asegurar que el rastro esté siempre al frente
+              pointerEvents: "none", // Permitir la interacción con elementos debajo del rastro
             }}
           />
         ))}
