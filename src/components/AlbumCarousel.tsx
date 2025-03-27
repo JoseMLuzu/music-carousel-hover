@@ -118,19 +118,36 @@ export function AlbumCarousel() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Album
-                image={album.image}
-                title={album.title}
-                audioUrl={album.audioUrl}
-                onPlay={() => handlePlay(album.id)}
-                key={`${album.id}-${currentlyPlayingId === album.id}`}
-                className={cn(
-                  "object-cover",
-                  album.id === 2 // Cambia el ID según la imagen que quieras personalizar
-                    ? "w-[30vw] h-[20vw] max-w-[200px] max-h-[200px]"
-                    : "w-[30vw] h-[30vw] max-w-[200px] max-h-[200px] sm:w-[25vw] sm:h-[25vw] sm.max-w-[250px] sm.max-h-[250px] lg:w-[15vw] lg:h-[15vw] lg.max-w-[300px] lg.max-h-[300px]"
+              <div className="relative w-[200px] h-[200px] sm:w-[250px] sm:h-[250px] lg:w-[300px] lg:h-[300px] overflow-hidden rounded-lg">
+                <img
+                  src={album.image}
+                  alt={album.title}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="mt-2 text-center text-white text-sm flex items-center justify-center gap-2">
+                {album.title.includes("SING") ? (
+                  <>
+                    {album.title.split("SING")[0]}SING
+                    <br />
+                    {album.title.split("SING")[1]}
+                  </>
+                ) : (
+                  album.title
                 )}
-              />
+                {album.id !== 1 && (
+                  <div className="relative group">
+                    <i className="fa-solid fa-circle-info text-gray-400 cursor-pointer"></i>
+                    <div className="absolute left-1/2 transform -translate-x-1/2 mt-2 w-64 bg-gray-800 text-gray-300 text-xs rounded-lg p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-50">
+                      SOUNDTRACK VANCOUVER FASHION WEEK
+                      <br />
+                      Compose, produced mixed and mastered the soundtrack for 5
+                      designers delivering an original piece that suited their
+                      collection in V.F.W spring 2025 and spring 2026.
+                    </div>
+                  </div>
+                )}
+              </div>
             </a>
           </div>
         ))}
