@@ -10,10 +10,10 @@ const Navbar: React.FC = () => {
   const getPageDescription = () => {
     switch (location.pathname) {
       case "/":
-        return "Welcome to The 99 Collection - A creative showcase of fashion, music, and visual arts.";
+        return "";
       case "/utopia-world":
       case "/film":
-        return "Explore our cinematic universe through visual storytelling and immersive film experiences.";
+        return "Composed and produced the soundtrack for a set of short films and music videos presented in film festivals, delivering a set of different songs enhancing each scene.";
       case "/fashion":
         return "Discover our unique fashion perspective, blending contemporary styles with artistic expression.";
       case "/music":
