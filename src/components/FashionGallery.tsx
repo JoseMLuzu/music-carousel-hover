@@ -124,7 +124,7 @@ const fashionItems: FashionItem[] = [
 ];
 
 export function FashionGallery() {
-  const [openDesigner, setOpenDesigner] = useState<string | null>(null); // Inicializar como null para que esté cerrada
+  const [openDesigner, setOpenDesigner] = useState<string | null>("j2-brand");
 
   return (
     <div className="relative w-full min-h-screen flex flex-col items-center justify-start bg-black overflow-hidden pt-28 pb-40">

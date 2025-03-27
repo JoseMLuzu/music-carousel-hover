@@ -135,6 +135,14 @@ export function AlbumCarousel() {
                 ) : (
                   album.title
                 )}
+                {album.id === 1 && (
+                  <div className="relative group">
+                    <i className="fa-solid fa-circle-info text-gray-400 cursor-pointer"></i>
+                    <div className="absolute left-1/2 transform -translate-x-1/2 mt-2 w-64 bg-gray-800 text-gray-300 text-xs rounded-lg p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-50">
+                      Original music by the 99 collection
+                    </div>
+                  </div>
+                )}
                 {album.id !== 1 && (
                   <div className="relative group">
                     <i className="fa-solid fa-circle-info text-gray-400 cursor-pointer"></i>

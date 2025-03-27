@@ -13,7 +13,7 @@ interface FilmItem {
 const films: FilmItem[] = [
   {
     id: 1,
-    title: "Swing Pols",
+    title: "Swimming Pools",
     thumbnail: "https://img.youtube.com/vi/TOcoHDHaEUg/0.jpg", // Miniatura válida de YouTube
     videoUrl: "https://www.youtube.com/embed/TOcoHDHaEUg", // URL de YouTube embebida
   },
