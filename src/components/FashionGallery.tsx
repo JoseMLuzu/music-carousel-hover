@@ -28,7 +28,7 @@ interface Designer {
 const designers: Designer[] = [
   {
     id: "j2-brand",
-    name: "Renda copeii",
+    name: "Renda Copeii",
     description:
       "Cutting-edge streetwear with bold silhouettes and unconventional materials.",
     collection: "URBAN EVOLUTION",
@@ -39,13 +39,6 @@ const designers: Designer[] = [
     description:
       "Elegant minimalism with architectural details and refined materials.",
     collection: "STRUCTURED POETRY",
-  },
-  {
-    id: "vision23",
-    name: "VISION23",
-    description:
-      "Future-forward designs blending technology with sustainable practices.",
-    collection: "TOMORROW TODAY",
   },
 ];
 
@@ -131,7 +124,7 @@ const fashionItems: FashionItem[] = [
 ];
 
 export function FashionGallery() {
-  const [openDesigner, setOpenDesigner] = useState<string | null>("j2-brand");
+  const [openDesigner, setOpenDesigner] = useState<string | null>(null); // Inicializar como null para que esté cerrada
 
   return (
     <div className="relative w-full min-h-screen flex flex-col items-center justify-start bg-black overflow-hidden pt-28 pb-40">
@@ -144,11 +137,6 @@ export function FashionGallery() {
         <h1 className="text-5xl font-bold text-white tracking-wider">
           FASHION
         </h1>
-        <p className="text-lg text-gray-300 mt-4 max-w-2xl mx-auto px-4">
-          Discover our unique fashion perspective, blending contemporary styles
-          with artistic expression. Each designer collection tells a story of
-          innovation and creativity.
-        </p>
       </motion.div>
 
       <Tabs defaultValue="designers" className="w-full max-w-6xl mx-auto px-6">
