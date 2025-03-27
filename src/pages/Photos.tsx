@@ -1,6 +1,58 @@
-
 import React from "react";
 import { Camera } from "lucide-react";
+
+const photos = [
+  {
+    id: 1,
+    src: "/photos-p/IMG_0261 2.JPG",
+    alt: "Photo 1",
+  },
+  {
+    id: 2,
+    src: "/photos-p/IMG_0353 2.JPG",
+    alt: "Photo 2",
+  },
+  {
+    id: 3,
+    src: "/photos-p/IMG_0357 2.JPG",
+    alt: "Photo 3",
+  },
+  {
+    id: 4,
+    src: "/photos-p/IMG_0512 2.JPG",
+    alt: "Photo 4",
+  },
+  {
+    id: 5,
+    src: "/photos-p/IMG_0796 2.JPG",
+    alt: "Photo 5",
+  },
+  {
+    id: 6,
+    src: "/photos-p/IMG_1283 2.JPG",
+    alt: "Photo 6",
+  },
+  {
+    id: 7,
+    src: "/photos-p/IMG_1740 2.JPG",
+    alt: "Photo 7",
+  },
+  {
+    id: 8,
+    src: "/photos-p/IMG_1820 2.JPG",
+    alt: "Photo 8",
+  },
+  {
+    id: 9,
+    src: "/photos-p/IMG_6272 2.JPG",
+    alt: "Photo 9",
+  },
+  {
+    id: 10,
+    src: "/photos-p/IMG_6275 2.JPG",
+    alt: "Photo 10",
+  },
+];
 
 const Photos = () => {
   return (
@@ -10,22 +62,18 @@ const Photos = () => {
           <Camera className="w-8 h-8 mr-3" />
           <h1 className="text-4xl font-bold">Photography</h1>
         </div>
-        
-        <div className="max-w-3xl mx-auto text-center mb-12">
-          <p className="text-lg text-gray-300 leading-relaxed">
-            Capturing moments through a unique lens, our photography services combine artistic vision with technical excellence. 
-            Each image tells a story, preserving emotions and creating timeless visual narratives that speak beyond words.
-          </p>
-        </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
-          {/* Placeholder for photo gallery items */}
-          {Array.from({ length: 6 }).map((_, index) => (
-            <div 
-              key={index} 
-              className="aspect-square bg-gray-900 rounded-lg flex items-center justify-center hover:bg-gray-800 transition-colors"
+          {photos.map((photo) => (
+            <div
+              key={photo.id}
+              className="aspect-square bg-gray-900 rounded-lg overflow-hidden hover:scale-105 transition-transform focus:outline-none flex items-center justify-center"
             >
-              <p className="text-lg text-gray-400">Photo Content {index + 1}</p>
+              <img
+                src={photo.src}
+                alt={photo.alt}
+                className="max-w-full max-h-full object-contain"
+              />
             </div>
           ))}
         </div>

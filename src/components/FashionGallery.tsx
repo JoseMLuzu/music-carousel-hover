@@ -124,7 +124,7 @@ const fashionItems: FashionItem[] = [
 ];
 
 export function FashionGallery() {
-  const [openDesigner, setOpenDesigner] = useState<string | null>("j2-brand");
+  const [openDesigner, setOpenDesigner] = useState<string | null>(null); // Inicializar como null para que no se abra al cargar
 
   return (
     <div className="relative w-full min-h-screen flex flex-col items-center justify-start bg-black overflow-hidden pt-28 pb-40">
@@ -146,11 +146,17 @@ export function FashionGallery() {
           transition={{ delay: 0.3, duration: 0.5 }}
           className="flex justify-center mb-8"
         >
-          <TabsList className="bg-gray-900/50 backdrop-blur-sm">
-            <TabsTrigger value="designers" className="text-white">
+          <TabsList className="bg-gray-900/50 backdrop-blur-sm p-9 rounded-lg mb-5">
+            <TabsTrigger
+              value="designers"
+              className="text-white text-xl px-8 py-4 rounded-md hover:bg-gray-800 transition"
+            >
               Designer Collections
             </TabsTrigger>
-            <TabsTrigger value="all" className="text-white">
+            <TabsTrigger
+              value="all"
+              className="text-white text-xl px-8 py-4 rounded-md hover:bg-gray-800 transition"
+            >
               View All
             </TabsTrigger>
           </TabsList>
